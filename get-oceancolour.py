@@ -1,6 +1,3 @@
-f = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/A20020012002365.L3m_YR_CHL_chlor_a_4km.bz2'
-
-workingdir = '/Users/Ireland/rsr/qgis-dev/'
 
 import urllib
 import bz2
@@ -9,11 +6,14 @@ import osr
 import numpy as np
 import datetime
 
+#this will be an input
+workingdir = '/Users/Ireland/rsr/qgis-dev/'
 
 def getdata(filenames):
   '''
-  Takes the filename which has been generated in 
+  Takes the filenames list which has been generated in 
   createfilename() and downloads and creates a GeoTiff
+  from all of them.
   '''
 
   nodata  = -32767
@@ -93,6 +93,6 @@ def getfilenames(minyear, maxyear):
 
 if __name__ == '__main__':
   
-  files = getfilenames(2000, 2004)
+  files = getfilenames(2003, 2004)
   getdata(files)
 
