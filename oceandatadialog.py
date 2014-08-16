@@ -20,9 +20,34 @@
  ***************************************************************************/
 """
 
+import getoceancolour as oc
+import time
+
 from PyQt4 import QtCore, QtGui
 from ui_oceandata import Ui_OceanData
 # create the dialog for zoom to point
+
+
+class DownloadThread(QtCore.QThread):
+    def __init__(self, path, minyear, maxyear):
+        self.path    = path
+        self.minyear = minyear
+        self.maxyear = maxyear
+        QtCore.QThread.__init__(self)
+ 
+    def __del__(self):
+        self.wait()
+
+    def log(self, text):
+        self.emit( QtCore.SIGNAL('update(QString)'), text )
+ 
+    def run(self):
+        # import you
+        self.log("Downloading to {}".format(self.path))
+        self.log("Range {0}-{1}".format(self.minyear, self.maxyear))
+        files = oc.getfilenames(self.minyear, self.maxyear)
+        oc.getdata(self.path, files)
+        self.log("Downloaded to {}".format(self.path))
 
 
 class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
@@ -34,3 +59,17 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
+
+    def log(self, text):
+        self.plainTextEdit.appendPlainText(text)
+
+    def accept(self):
+        minyear = self.spnStartDate.value()
+        maxyear = self.spnEndDate.value()
+        path    = self.txtPath.text()
+
+        self.downloadThread = DownloadThread(path, minyear, maxyear)
+        self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
+        self.downloadThread.start()
+
+

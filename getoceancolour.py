@@ -6,10 +6,8 @@ import osr
 import numpy as np
 import datetime
 
-#this will be an input
-workingdir = '/Users/Ireland/rsr/qgis-dev/'
 
-def getdata(filenames):
+def getdata(workingdir, filenames):
   '''
   Takes the filenames list which has been generated in 
   createfilename() and downloads and creates a GeoTiff

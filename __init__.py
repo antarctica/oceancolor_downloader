@@ -22,6 +22,6 @@
 """
 
 def classFactory(iface):
-    # load OceanData class from file OceanData
+    # load OceanData class from file OceanData 
     from oceandata import OceanData
     return OceanData(iface)
