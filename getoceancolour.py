@@ -1,4 +1,3 @@
-
 import urllib
 import bz2
 import gdal
