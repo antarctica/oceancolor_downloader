@@ -1,6 +1,10 @@
 oceancolour-downloader
 ======================
 
+##On-going dev notes
+
+The plugin is currently broken, as I am in the process of changing getoceandata.py. Planning to get this to a point I can also download monthly chl data. 
+
 ##What is it
 
 QGIS plugin to allow easy download and use of earth observation datasets with QGIS. 
