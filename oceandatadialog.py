@@ -20,7 +20,7 @@
  ***************************************************************************/
 """
 
-import getoceancolour as oc
+from downloader import downloader
 import time
 
 from PyQt4 import QtCore, QtGui
@@ -29,10 +29,12 @@ from ui_oceandata import Ui_OceanData
 
 
 class DownloadThread(QtCore.QThread):
-    def __init__(self, path, minyear, maxyear):
+    def __init__(self, path, mindate, maxdate, res, datatype):
         self.path    = path
-        self.minyear = minyear
-        self.maxyear = maxyear
+        self.mindate = mindate.toPyDate()
+        self.maxdate = maxdate.toPyDate()
+	self.res     = res
+	self.datatype = datatype
         QtCore.QThread.__init__(self)
  
     def __del__(self):
@@ -44,10 +46,13 @@ class DownloadThread(QtCore.QThread):
     def run(self):
         # import you
         self.log("Downloading to {}".format(self.path))
-        self.log("Range {0}-{1}".format(self.minyear, self.maxyear))
-        files = oc.getfilenames(self.minyear, self.maxyear)
-        oc.getdata(self.path, files)
-        self.log("Downloaded to {}".format(self.path))
+        self.log("Range {0}-{1}".format(self.mindate, self.maxdate))
+        C = downloader.get(self.datatype)
+	d = C(self.mindate, self.maxdate, self.res)
+	f = d.download('/some/path/')
+	self.log('files: {}'.format(f))
+	self.log("Downloaded to {}".format(self.path))
+	self.log("max date: {}".format(self.maxdate))
 
 
 class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
@@ -64,11 +69,13 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         self.plainTextEdit.appendPlainText(text)
 
     def accept(self):
-        minyear = self.spnStartDate.value()
-        maxyear = self.spnEndDate.value()
+        mindate = self.startDate.date()
+        maxdate = self.endDate.date()
         path    = self.txtPath.text()
+        res     = self.spnRes.value()
+	datatype = 'chl'
 
-        self.downloadThread = DownloadThread(path, minyear, maxyear)
+        self.downloadThread = DownloadThread(path, mindate, maxdate, res, datatype)
         self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
         self.downloadThread.start()
 
