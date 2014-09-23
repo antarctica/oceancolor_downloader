@@ -49,8 +49,8 @@ class DownloadThread(QtCore.QThread):
         self.log("Range {0}-{1}".format(self.mindate, self.maxdate))
         C = downloader.get(self.datatype)
 	d = C(self.mindate, self.maxdate, self.res)
-	f = d.download('/some/path/')
-	self.log('files: {}'.format(f))
+	x = d.download(self.path)
+	self.log("g: {}".format(x))
 	self.log("Downloaded to {}".format(self.path))
 	self.log("max date: {}".format(self.maxdate))
 
