@@ -68,7 +68,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 	self.data_desc = {
-		'AQUA MODIS Chlorophyll Concentration': 'Valid date range: 2003 - present',
+		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2003 - present',
 		'-': 'hi',
 		'hi': 'this is a test',
 	}
