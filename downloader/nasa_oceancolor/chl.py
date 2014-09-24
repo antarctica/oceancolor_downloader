@@ -4,7 +4,8 @@ import bz2
 from osgeo import gdal
 from osgeo import osr
 import numpy as np
-
+import ocfiledates
+from dateutil.relativedelta import relativedelta
 
 class Chl:
 	"""
@@ -13,9 +14,6 @@ class Chl:
 
 	def __init__(self, start_date, end_date, res, time_composite='Annual'):
 		
-		#self.start_date = datetime.strptime(start_date, '%Y-%m-%d')
-		#self.end_date   = datetime.strptime(end_date, '%Y-%m-%d')
-
 		self.start_date     = start_date
 		self.end_date       = end_date
 		self.res            = res
@@ -29,7 +27,7 @@ class Chl:
     		self.outproj = osr.SpatialReference()
     		self.outproj.SetWellKnownGeogCS("WGS84")    
     		self.nodata = -32767
-	
+
 
 	def download(self, path):
 		"""
@@ -43,31 +41,48 @@ class Chl:
 			self.__process(f_uncompress)
 
 
-
-
 	def __createfilenames(self):
 		"""
 		Creates a list of filenames based on inputs 
 		"""
+		minyear = self.start_date.year
+		maxyear = self.end_date.year
+
+		leap_years = [x for x in range(minyear, maxyear+1) 
+			if (x % 400 == 0) or (x % 4 == 0 and not x % 100 == 0)]
+	
+		filenames = []
 		if self.time_composite == 'Annual':
-			valid_year_min = 2002
-			valid_year_max = 2013
 
 			minyear = self.start_date.year
 			maxyear = self.end_date.year
 
-			leap_years = [x for x in range(minyear, maxyear+1) 
-				if (x % 400 == 0) or (x % 4 == 0 and not x % 100 == 0)]
-
-			filenames = []
 			for year in range(minyear, maxyear + 1):
 				if year in leap_years:
 					filenames.append('A{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 				else:
 					filenames.append('A{0}001{0}365.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
-
-		return filenames
 		
+		if self.time_composite == 'Monthly':
+			d = self.start_date
+			while d <= self.end_date:
+				m = d.month
+				if d.year in leap_years:
+					date_ref = ocfiledates.monthly_leap
+				else:
+					date_ref = ocfiledates.monthly_nonleap
+				filenames.append('A{0}{1}{0}{2}.L3m_MO_CHL_chlor_a_{3}km'.format(d.year, date_ref[m][0], date_ref[m][1], self.res))
+				d = d + relativedelta(months=1)
+
+		if self.time_composite == 'Daily':
+			d = self.start_date
+			while d <= self.end_date:
+				doy = d.strftime('%j')
+				filenames.append('A{0}{1}.L3m_DAY_CHL_chlor_a_{2}km'.format(d.year, doy, self.res))
+				d = d + relativedelta(days=1)
+		
+		return filenames
+
 
 	def __extract(self, targetfile):
 		"""

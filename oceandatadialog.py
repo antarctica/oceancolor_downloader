@@ -49,7 +49,7 @@ class DownloadThread(QtCore.QThread):
  
     def run(self):
         # import you
-	self.log("Dataset: {0} {1} {2}".format(self.res, self.time_period, self.datatype))
+	self.log("Dataset: {0}km {1} {2}".format(self.res, self.time_period, self.datatype))
 	self.log("Range: {0} to {1}".format(self.mindate, self.maxdate))
 	self.log("Downloading to: {}".format(self.path))
         C = downloader.get(self.datatype)

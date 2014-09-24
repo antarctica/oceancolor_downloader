@@ -102,6 +102,16 @@
         <string>Annual</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Monthly</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Daily</string>
+       </property>
+      </item>
      </widget>
     </item>
    </layout>

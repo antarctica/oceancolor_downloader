@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_oceandata.ui'
+# Form implementation generated from reading ui file '../../ui_oceandata.ui'
 #
-# Created: Wed Sep 24 14:03:12 2014
+# Created: Wed Sep 24 23:05:25 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -62,6 +62,8 @@ class Ui_OceanData(object):
         self.horizontalLayout.addWidget(self.label_6)
         self.comboBoxTime = QtGui.QComboBox(self.layoutWidget)
         self.comboBoxTime.setObjectName(_fromUtf8("comboBoxTime"))
+        self.comboBoxTime.addItem(_fromUtf8(""))
+        self.comboBoxTime.addItem(_fromUtf8(""))
         self.comboBoxTime.addItem(_fromUtf8(""))
         self.horizontalLayout.addWidget(self.comboBoxTime)
         self.layoutWidget1 = QtGui.QWidget(OceanData)
@@ -142,6 +144,8 @@ class Ui_OceanData(object):
         self.label_5.setText(_translate("OceanData", "NASA Oceancolor Downloader", None))
         self.label_6.setText(_translate("OceanData", "Time period:", None))
         self.comboBoxTime.setItemText(0, _translate("OceanData", "Annual", None))
+        self.comboBoxTime.setItemText(1, _translate("OceanData", "Monthly", None))
+        self.comboBoxTime.setItemText(2, _translate("OceanData", "Daily", None))
         self.label_2.setText(_translate("OceanData", "Date range:", None))
         self.startDate.setDisplayFormat(_translate("OceanData", "yyyy/MM/dd", None))
         self.endDate.setDisplayFormat(_translate("OceanData", "yyyy/MM/dd", None))
