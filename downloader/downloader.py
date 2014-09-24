@@ -4,7 +4,7 @@ from nasa_oceancolor.chl import Chl
 
 __downloaders = {
 	'sst': Sst,
-	'chl': Chl,
+	'AQUA MODIS Chlorophyll Concentration': Chl,
 }
 
 def get(k):
