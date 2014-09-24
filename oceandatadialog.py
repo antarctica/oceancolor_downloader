@@ -68,6 +68,12 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
     def log(self, text):
         self.plainTextEdit.appendPlainText(text)
 
+
+    def open(self):
+	self.fileDialog = QtGui.QFileDialog(self)
+	#self.fileDialog.show()
+	self.txtPath.setText(self.fileDialog.getExistingDirectory())
+
     def accept(self):
         mindate = self.startDate.date()
         maxdate = self.endDate.date()
