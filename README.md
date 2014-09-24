@@ -26,7 +26,8 @@ Access CHL-a concentrations from NASA Oceancolour. Download annual datasets give
 4. add dataset type to the interface, and a box to say feedback to user for the valid time period. 
 5. some way to stop users selecting dates outside the time period.
 6. add another optional dataset - SST
-
+7. create a file in download directory containing reference and license information.
+8. any ref/license information in user interface? Option to download as a file?
 
 How to add monthly range functionality? No idea yet. 
 
