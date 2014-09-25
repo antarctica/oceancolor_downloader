@@ -83,7 +83,7 @@
     <rect>
      <x>20</x>
      <y>150</y>
-     <width>185</width>
+     <width>193</width>
      <height>26</height>
     </rect>
    </property>
@@ -112,6 +112,11 @@
         <string>Daily</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>8 day</string>
+       </property>
+      </item>
      </widget>
     </item>
    </layout>
@@ -135,14 +140,14 @@
     </item>
     <item>
      <widget class="QDateEdit" name="startDate">
-      <property name="dateTime">
+      <property name="minimumDateTime">
        <datetime>
         <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
-        <year>2002</year>
-        <month>1</month>
-        <day>1</day>
+        <year>1752</year>
+        <month>9</month>
+        <day>14</day>
        </datetime>
       </property>
       <property name="displayFormat">
@@ -153,7 +158,7 @@
       </property>
       <property name="date">
        <date>
-        <year>2002</year>
+        <year>1995</year>
         <month>1</month>
         <day>1</day>
        </date>
@@ -197,18 +202,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBoxRes">
-      <item>
-       <property name="text">
-        <string>4km</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>9km</string>
-       </property>
-      </item>
-     </widget>
+     <widget class="QComboBox" name="comboBoxRes"/>
     </item>
    </layout>
   </widget>
@@ -269,17 +263,17 @@
       </property>
       <item>
        <property name="text">
-        <string>-</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>hi</string>
+        <string>Choose a dataset</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>AQUA MODIS Chlorophyll Concentration</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SeaWiFS Chlorophyll Concentration</string>
        </property>
       </item>
      </widget>

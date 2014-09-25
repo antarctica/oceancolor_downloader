@@ -7,7 +7,7 @@ import numpy as np
 import ocfiledates
 from dateutil.relativedelta import relativedelta
 
-class Chl:
+class Chlsw:
 	"""
 	This is my CHL class
 	"""
@@ -59,9 +59,9 @@ class Chl:
 
 			for year in range(minyear, maxyear + 1):
 				if year in leap_years:
-					filenames.append('A{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
+					filenames.append('S{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 				else:
-					filenames.append('A{0}001{0}365.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
+					filenames.append('S{0}001{0}365.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 		
 		if self.time_composite == 'Monthly':
 			d = self.start_date
@@ -71,14 +71,14 @@ class Chl:
 					date_ref = ocfiledates.monthly_leap
 				else:
 					date_ref = ocfiledates.monthly_nonleap
-				filenames.append('A{0}{1}{0}{2}.L3m_MO_CHL_chlor_a_{3}km'.format(d.year, date_ref[m][0], date_ref[m][1], self.res))
+				filenames.append('S{0}{1}{0}{2}.L3m_MO_CHL_chlor_a_{3}km'.format(d.year, date_ref[m][0], date_ref[m][1], self.res))
 				d = d + relativedelta(months=1)
 
 		if self.time_composite == 'Daily':
 			d = self.start_date
 			while d <= self.end_date:
 				doy = d.strftime('%j')
-				filenames.append('A{0}{1}.L3m_DAY_CHL_chlor_a_{2}km'.format(d.year, doy, self.res))
+				filenames.append('S{0}{1}.L3m_DAY_CHL_chlor_a_{2}km'.format(d.year, doy, self.res))
 				d = d + relativedelta(days=1)
 		
 		if self.time_composite == '8 day':
@@ -98,7 +98,7 @@ class Chl:
 					date_ref = ocfiledates.wk_leap
 					mindoy = int(doy)
 					maxdoy = max(date_ref[mindoy])
-					filenames.append('A{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km'.format(d.year, mindoy, maxdoy, self.res))
+					filenames.append('S{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km'.format(d.year, mindoy, maxdoy, self.res))
 					if mindoy == 361:
 						d = d + relativedelta(days=6)
 					else:
@@ -109,7 +109,7 @@ class Chl:
 					mindoy = int(doy)
 					print 'mindoy', mindoy
 					maxdoy = max(date_ref[mindoy])
-					filenames.append('A{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km'.format(d.year, mindoy, maxdoy, self.res))
+					filenames.append('S{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km'.format(d.year, mindoy, maxdoy, self.res))
 					if mindoy == 361:
 						d = d + relativedelta(days=5)
 					else:
@@ -155,7 +155,7 @@ class Chl:
 		band.SetNoDataValue(self.nodata)
 		dst_ds.SetGeoTransform(self.geo)
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
-		dst_ds.SetMetadataItem('SENSOR', 'AQUA_MODIS')
+		dst_ds.SetMetadataItem('SENSOR', 'SeaWiFS')
 		dst_ds.SetMetadataItem('RESOLUTION', '{}km'.format(self.res))
 		dst_ds.SetMetadataItem('DATA START DAY', g.GetMetadataItem('Period Start Day'))
 		dst_ds.SetMetadataItem('DATA END DAY', g.GetMetadataItem('Period End Day'))

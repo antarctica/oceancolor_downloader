@@ -48,7 +48,6 @@ class DownloadThread(QtCore.QThread):
         self.emit( QtCore.SIGNAL('update(QString)'), text )
  
     def run(self):
-        # import you
 	self.log("Dataset: {0}km {1} {2}".format(self.res, self.time_period, self.datatype))
 	self.log("Range: {0} to {1}".format(self.mindate, self.maxdate))
 	self.log("Downloading to: {}".format(self.path))
@@ -68,9 +67,9 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 	self.data_desc = {
-		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2003 - present',
-		'-': 'hi',
-		'hi': 'this is a test',
+		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
+		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
+		'Choose a dataset': '',
 	}
 
     
@@ -81,6 +80,27 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.infoTextEdit.clear()
 	data_type = self.data_desc[self.comboBoxDatasets.currentText()]
 	self.infoTextEdit.appendPlainText(data_type)
+	
+	self.comboBoxRes.clear()
+
+	if self.comboBoxDatasets.currentText() == 'SeaWiFS Chlorophyll Concentration':
+	    self.comboBoxRes.insertItem(0, '9km')
+	    mindate = QtCore.QDate()
+	    mindate.setDate(1997,9,4)
+	    maxdate = QtCore.QDate()
+	    maxdate.setDate(2010,12,11)
+	    self.startDate.setDate(mindate)
+	    self.endDate.setDate(maxdate)
+	if self.comboBoxDatasets.currentText() == 'AQUA MODIS Chlorophyll Concentration':
+	    self.comboBoxRes.insertItems(0, ['9km', '4km'])
+	    mindate = QtCore.QDate()
+	    mindate.setDate(2002,7,4)
+	    maxdate = QtCore.QDate()
+	    maxdate.setDate(2013,12,31)
+	    self.startDate.setDate(mindate)
+	    self.endDate.setDate(maxdate)
+
+
 
     def open(self):
 	self.fileDialog = QtGui.QFileDialog(self)

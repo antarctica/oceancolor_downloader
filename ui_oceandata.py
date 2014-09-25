@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '../../ui_oceandata.ui'
+# Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Wed Sep 24 23:05:25 2014
+# Created: Thu Sep 25 14:46:08 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -52,7 +52,7 @@ class Ui_OceanData(object):
         self.infoTextEdit.setGeometry(QtCore.QRect(10, 90, 431, 51))
         self.infoTextEdit.setObjectName(_fromUtf8("infoTextEdit"))
         self.layoutWidget = QtGui.QWidget(OceanData)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 150, 185, 26))
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 150, 193, 26))
         self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setMargin(0)
@@ -62,6 +62,7 @@ class Ui_OceanData(object):
         self.horizontalLayout.addWidget(self.label_6)
         self.comboBoxTime = QtGui.QComboBox(self.layoutWidget)
         self.comboBoxTime.setObjectName(_fromUtf8("comboBoxTime"))
+        self.comboBoxTime.addItem(_fromUtf8(""))
         self.comboBoxTime.addItem(_fromUtf8(""))
         self.comboBoxTime.addItem(_fromUtf8(""))
         self.comboBoxTime.addItem(_fromUtf8(""))
@@ -76,9 +77,9 @@ class Ui_OceanData(object):
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_2.addWidget(self.label_2)
         self.startDate = QtGui.QDateEdit(self.layoutWidget1)
-        self.startDate.setDateTime(QtCore.QDateTime(QtCore.QDate(2002, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.startDate.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 9, 14), QtCore.QTime(0, 0, 0)))
         self.startDate.setCalendarPopup(True)
-        self.startDate.setDate(QtCore.QDate(2002, 1, 1))
+        self.startDate.setDate(QtCore.QDate(1995, 1, 1))
         self.startDate.setObjectName(_fromUtf8("startDate"))
         self.horizontalLayout_2.addWidget(self.startDate)
         self.endDate = QtGui.QDateEdit(self.layoutWidget1)
@@ -97,8 +98,6 @@ class Ui_OceanData(object):
         self.horizontalLayout_3.addWidget(self.label_3)
         self.comboBoxRes = QtGui.QComboBox(self.layoutWidget2)
         self.comboBoxRes.setObjectName(_fromUtf8("comboBoxRes"))
-        self.comboBoxRes.addItem(_fromUtf8(""))
-        self.comboBoxRes.addItem(_fromUtf8(""))
         self.horizontalLayout_3.addWidget(self.comboBoxRes)
         self.layoutWidget3 = QtGui.QWidget(OceanData)
         self.layoutWidget3.setGeometry(QtCore.QRect(20, 270, 401, 25))
@@ -146,17 +145,16 @@ class Ui_OceanData(object):
         self.comboBoxTime.setItemText(0, _translate("OceanData", "Annual", None))
         self.comboBoxTime.setItemText(1, _translate("OceanData", "Monthly", None))
         self.comboBoxTime.setItemText(2, _translate("OceanData", "Daily", None))
+        self.comboBoxTime.setItemText(3, _translate("OceanData", "8 day", None))
         self.label_2.setText(_translate("OceanData", "Date range:", None))
         self.startDate.setDisplayFormat(_translate("OceanData", "yyyy/MM/dd", None))
         self.endDate.setDisplayFormat(_translate("OceanData", "yyyy/MM/dd", None))
         self.label_3.setText(_translate("OceanData", "Resolution:", None))
-        self.comboBoxRes.setItemText(0, _translate("OceanData", "4km", None))
-        self.comboBoxRes.setItemText(1, _translate("OceanData", "9km", None))
         self.label.setText(_translate("OceanData", "Download to:", None))
         self.txtPath.setText(_translate("OceanData", "/Users/Ireland/rsr/qgis-dev/", None))
         self.toolButton.setText(_translate("OceanData", "...", None))
         self.label_4.setText(_translate("OceanData", "Dataset:", None))
-        self.comboBoxDatasets.setItemText(0, _translate("OceanData", "-", None))
-        self.comboBoxDatasets.setItemText(1, _translate("OceanData", "hi", None))
-        self.comboBoxDatasets.setItemText(2, _translate("OceanData", "AQUA MODIS Chlorophyll Concentration", None))
+        self.comboBoxDatasets.setItemText(0, _translate("OceanData", "Choose a dataset", None))
+        self.comboBoxDatasets.setItemText(1, _translate("OceanData", "AQUA MODIS Chlorophyll Concentration", None))
+        self.comboBoxDatasets.setItemText(2, _translate("OceanData", "SeaWiFS Chlorophyll Concentration", None))
 
