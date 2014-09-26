@@ -16,8 +16,11 @@ Access CHL-a concentrations from NASA Oceancolour. Download annual datasets give
 
 ##The plan
 
-1. Choice of SST or CHL-a
+1. Choice of SST or CHL-a, from SeaWiFS, AQUA and TERRA
 2. Choice of monthly, annual, daily or 8day
+3. output license information in download directory
+4. option to create custom composite from monthly data only. 
+
 
 ##Implementation
 
@@ -30,6 +33,7 @@ Access CHL-a concentrations from NASA Oceancolour. Download annual datasets give
 7. create a file in download directory containing reference and license information.
 8. any ref/license information in user interface? Option to download as a file?
 9. The MODIS and SeaWiFS downloaders are pretty much identical, as only difference in filename is whether it starts with a 'A' or 'S'. Combine??
+10. Custom composites??? Issues with large time series? Calculate from original HDFs as will be smaller files. Output as GeoTiff. 
 
 ##Future plans
 
