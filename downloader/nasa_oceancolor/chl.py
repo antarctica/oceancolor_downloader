@@ -71,7 +71,7 @@ class Chl:
 				if year in leap_years:
 					filenames.append('A{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 				else:
-					filenames.append('A{0}001{0}364.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
+					filenames.append('A{0}001{0}365.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 		
 		if self.time_composite == 'Monthly':
 			d = self.start_date
