@@ -1,5 +1,6 @@
 from datetime import datetime
 import urllib
+import urllib2
 import bz2
 from osgeo import gdal
 from osgeo import osr
@@ -34,11 +35,20 @@ class Chl:
 		This downloads
 	
 		"""
+		failed_files = []
 		self.path = path
 		filenames = self.__createfilenames()
 		for f in filenames:
 			f_uncompress = self.__extract(f)
-			self.__process(f_uncompress)
+			if not f_uncompress == 1:
+				self.__process(f_uncompress)
+			else:
+				failed_files.append(f)
+		
+		if len(failed_files) >= 1:
+			return failed_files
+		else:
+			return 0
 
 
 	def __createfilenames(self):
@@ -61,7 +71,7 @@ class Chl:
 				if year in leap_years:
 					filenames.append('A{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 				else:
-					filenames.append('A{0}001{0}365.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
+					filenames.append('A{0}001{0}364.L3m_YR_CHL_chlor_a_{1}km'.format(year, self.res))
 		
 		if self.time_composite == 'Monthly':
 			d = self.start_date
@@ -126,13 +136,25 @@ class Chl:
 		f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(targetfile)
 		f_compress = '{0}{1}.bz2'.format(self.path, targetfile)
 		f_uncompress = '{0}{1}'.format(self.path, targetfile)
-		urllib.urlretrieve(f_download, f_compress)
-		uncom = bz2.BZ2File(f_compress, 'r').read()
-		output = open(f_uncompress, 'w')
-		output.write(uncom)
-		output.close()
 
-		return f_uncompress
+
+		try:
+			thefile = urllib2.urlopen(f_download)
+			f = open(f_compress, 'wb')
+			f.write(thefile.read())
+			f.close()
+			uncom = bz2.BZ2File(f_compress, 'r').read()
+                	output = open(f_uncompress, 'w')
+		        output.write(uncom)
+	                output.close()
+			return f_uncompress
+		
+		except:
+			return 1
+
+
+
+
 
 
 	def __process(self, targetfile):
@@ -177,5 +199,5 @@ if __name__ == "__main__":
 	sd = datetime(2004, 12, 01)
 	ed = datetime(2005, 12, 15)
 	d = Chl(sd, ed, 9, '8 day')
-	d.download('/Users/Ireland/rsr/qgis-dev/test_8day/')
+	d.download('/Users/Ireland/rsr/qgis-dev/')
 

@@ -54,6 +54,9 @@ class DownloadThread(QtCore.QThread):
         C = downloader.get(self.datatype)
 	d = C(self.mindate, self.maxdate, self.res, self.time_period)
 	x = d.download(self.path)
+	if x is not 0:
+		for f in x:
+			self.log("Failed: {}".format(f))
 	self.log("Downloaded.".format(self.path))
 
 

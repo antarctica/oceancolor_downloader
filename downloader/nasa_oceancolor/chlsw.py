@@ -113,8 +113,8 @@ class Chlsw:
 					if mindoy == 361:
 						d = d + relativedelta(days=5)
 					else:
-						d = d + relativedelta(days=8)
-		
+               						d = d + relativedelta(days=8)
+	        print filenames	
 		return filenames
 
 
@@ -174,8 +174,8 @@ class Chlsw:
 
 
 if __name__ == "__main__":
-	sd = datetime(2004, 12, 01)
-	ed = datetime(2005, 12, 15)
-	d = Chl(sd, ed, 9, '8 day')
-	d.download('/Users/Ireland/rsr/qgis-dev/test_8day/')
+	sd = datetime(2008, 03, 10)
+	ed = datetime(2008, 03, 27)
+	d = Chlsw(sd, ed, 9, 'Monthly')
+	d.download('/Users/Ireland/rsr/qgis-dev/')
 
