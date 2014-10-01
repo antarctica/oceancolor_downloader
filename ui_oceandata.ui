@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>398</width>
-    <height>600</height>
+    <height>594</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -20,159 +20,27 @@
    <string>OceanData</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="8" column="0">
-    <widget class="QPushButton" name="btnDownload">
-     <property name="text">
-      <string>Download</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="font">
-      <font>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>NASA Oceancolor Downloader</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QPlainTextEdit" name="infoTextEdit">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>132</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>132</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QPlainTextEdit" name="plainTextEdit">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>2</horstretch>
-       <verstretch>2</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
+   <item row="6" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Dataset:</string>
+        <string>Download to:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxDatasets">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <item>
-        <property name="text">
-         <string>Choose a dataset</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>AQUA MODIS Chlorophyll Concentration</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SeaWiFS Chlorophyll Concentration</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="5" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLineEdit" name="txtPath">
        <property name="text">
-        <string>Resolution:</string>
+        <string>/Users/Ireland/rsr/qgis-dev/</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxRes">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="3" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_6">
+      <widget class="QToolButton" name="toolButton">
        <property name="text">
-        <string>Time period:</string>
+        <string>...</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxTime">
-       <item>
-        <property name="text">
-         <string>Annual</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Monthly</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Daily</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>8 day</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>
@@ -244,30 +112,167 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>Download to:</string>
+        <string>Time period:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtPath">
+      <widget class="QComboBox" name="comboBoxTime">
+       <item>
+        <property name="text">
+         <string>Annual</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monthly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>8 day</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Daily</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>/Users/Ireland/rsr/qgis-dev/</string>
+        <string>Dataset:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton">
+      <widget class="QComboBox" name="comboBoxDatasets">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Choose a dataset</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AQUA MODIS Chlorophyll Concentration</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SeaWiFS Chlorophyll Concentration</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AQUA MODIS Sea Surface Temperature</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>...</string>
+        <string>Resolution:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBoxRes">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="7" column="0">
+    <widget class="QPlainTextEdit" name="plainTextEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>2</horstretch>
+       <verstretch>2</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPlainTextEdit" name="infoTextEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>120</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>132</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>NASA Oceancolor Downloader</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QPushButton" name="btnDownload">
+     <property name="text">
+      <string>Download</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -1,5 +1,7 @@
+from datetime import date
+from datetime import timedelta
 from datetime import datetime
-import urllib
+import urllib2
 import bz2
 from osgeo import gdal
 from osgeo import osr
@@ -7,7 +9,7 @@ import numpy as np
 import ocfiledates
 from dateutil.relativedelta import relativedelta
 
-class Chlsw:
+class Schl:
 	"""
 	This is my CHL class
 	"""
@@ -34,11 +36,20 @@ class Chlsw:
 		This downloads
 	
 		"""
+		failed_files = []
 		self.path = path
 		filenames = self.__createfilenames()
 		for f in filenames:
 			f_uncompress = self.__extract(f)
-			self.__process(f_uncompress)
+			if not f_uncompress == 1:
+				self.__process(f_uncompress)
+			else:
+				failed_files.append(f)
+
+		if len(failed_files) >= 1:
+			return failed_files
+		else:
+			return 0
 
 
 	def __createfilenames(self):
@@ -83,15 +94,13 @@ class Chlsw:
 		
 		if self.time_composite == '8 day':
 			d = self.start_date
-			print d
 			doy = d.strftime('%j')
-			print doy
 			date_ref = ocfiledates.wk
 			#get it so the date is at the start of any 8 day period to initialise the loop
 			for dr in date_ref:
 				if int(doy) in dr:
 					doy = min(dr)
-					d = datetime.strptime('{} {}'.format(d.year, doy), '%Y %j')
+					d = date(d.year, 1, 1) + timedelta(doy -1) 
 			while d <= self.end_date:
 				doy = d.strftime('%j')
 				if d.year in leap_years:
@@ -107,15 +116,16 @@ class Chlsw:
 
 					date_ref = ocfiledates.wk_nonleap
 					mindoy = int(doy)
-					print 'mindoy', mindoy
 					maxdoy = max(date_ref[mindoy])
 					filenames.append('S{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km'.format(d.year, mindoy, maxdoy, self.res))
 					if mindoy == 361:
 						d = d + relativedelta(days=5)
 					else:
-               						d = d + relativedelta(days=8)
-	        print filenames	
+               					d = d + relativedelta(days=8)
+	       
 		return filenames
+
+
 
 
 	def __extract(self, targetfile):
@@ -126,13 +136,20 @@ class Chlsw:
 		f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(targetfile)
 		f_compress = '{0}{1}.bz2'.format(self.path, targetfile)
 		f_uncompress = '{0}{1}'.format(self.path, targetfile)
-		urllib.urlretrieve(f_download, f_compress)
-		uncom = bz2.BZ2File(f_compress, 'r').read()
-		output = open(f_uncompress, 'w')
-		output.write(uncom)
-		output.close()
 
-		return f_uncompress
+		try:
+			thefile = urllib2.urlopen(f_download)
+			f = open(f_compress, 'wb')
+			f.write(thefile.read())
+			f.close()
+			uncom = bz2.BZ2File(f_compress, 'r').read()
+			output = open(f_uncompress, 'w')
+			output.write(uncom)
+			output.close()
+			return f_uncompress
+		except:
+			return 1
+
 
 
 	def __process(self, targetfile):
@@ -174,8 +191,8 @@ class Chlsw:
 
 
 if __name__ == "__main__":
-	sd = datetime(2008, 03, 10)
-	ed = datetime(2008, 03, 27)
-	d = Chlsw(sd, ed, 9, 'Monthly')
-	d.download('/Users/Ireland/rsr/qgis-dev/')
+	sd = datetime(2008, 9, 10)
+	ed = datetime(2008, 9, 27)
+	d = Chlsw(sd, ed, 9, '8 day')
+	d.download('/Users/Ireland/rsr/qgis-dev/test_failures/')
 

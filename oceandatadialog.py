@@ -60,6 +60,7 @@ class DownloadThread(QtCore.QThread):
 	self.log("Downloaded.".format(self.path))
 
 
+
 class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
     def __init__(self):
         QtGui.QDialog.__init__(self)
@@ -73,6 +74,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
 		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
 		'Choose a dataset': '',
+		'AQUA MODIS Sea Surface Temperature': 'Sea Surface Temps \nNot working yet.',
 	}
 
     
@@ -122,7 +124,5 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
         self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
         self.downloadThread.start()
-
-
 
 

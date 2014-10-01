@@ -1,12 +1,12 @@
-from nasa_oceancolor.sst import Sst
-from nasa_oceancolor.chl import Chl
-from nasa_oceancolor.chlsw import Chlsw
+from nasa_oceancolor.mnsst import Mnsst
+from nasa_oceancolor.mchl import Mchl
+from nasa_oceancolor.schl import Schl
 
 
 __downloaders = {
-	'sst': Sst,
-	'AQUA MODIS Chlorophyll Concentration': Chl,
-	'SeaWiFS Chlorophyll Concentration': Chlsw
+	'AQUA MODIS Sea Surface Temperature': Mnsst,
+	'AQUA MODIS Chlorophyll Concentration': Mchl,
+	'SeaWiFS Chlorophyll Concentration': Schl
 }
 
 def get(k):

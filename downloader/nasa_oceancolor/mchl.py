@@ -10,7 +10,7 @@ import ocfiledates
 from dateutil.relativedelta import relativedelta
 
 
-class Chl:
+class Mchl:
 	"""
 	This is my CHL class
 	"""
