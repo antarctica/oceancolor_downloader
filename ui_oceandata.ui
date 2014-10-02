@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>398</width>
-    <height>508</height>
+    <width>406</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -235,7 +235,7 @@
      <item>
       <widget class="QLineEdit" name="txtPath">
        <property name="text">
-        <string>/Users/Ireland/rsr/qgis-dev/</string>
+        <string/>
        </property>
       </widget>
      </item>

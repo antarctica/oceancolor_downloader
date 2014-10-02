@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Thu Oct  2 09:24:13 2014
+# Created: Thu Oct  2 17:02:21 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_OceanData(object):
     def setupUi(self, OceanData):
         OceanData.setObjectName(_fromUtf8("OceanData"))
-        OceanData.resize(398, 508)
+        OceanData.resize(406, 516)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -128,6 +128,7 @@ class Ui_OceanData(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout_4.addWidget(self.label)
         self.txtPath = QtGui.QLineEdit(OceanData)
+        self.txtPath.setText(_fromUtf8(""))
         self.txtPath.setObjectName(_fromUtf8("txtPath"))
         self.horizontalLayout_4.addWidget(self.txtPath)
         self.toolButton = QtGui.QToolButton(OceanData)
@@ -173,7 +174,6 @@ class Ui_OceanData(object):
         self.endDate.setDisplayFormat(_translate("OceanData", "yyyy/MM/dd", None))
         self.label_3.setText(_translate("OceanData", "Resolution:", None))
         self.label.setText(_translate("OceanData", "Download to:", None))
-        self.txtPath.setText(_translate("OceanData", "/Users/Ireland/rsr/qgis-dev/", None))
         self.toolButton.setText(_translate("OceanData", "...", None))
         self.btnDownload.setText(_translate("OceanData", "Download", None))
 
