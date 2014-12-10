@@ -82,9 +82,9 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         self.plainTextEdit.appendPlainText(text)
 
     def show(self):
-	self.infoTextEdit.clear()
+	self.plainTextEdit.clear()
 	data_type = self.data_desc[self.comboBoxDatasets.currentText()]
-	self.infoTextEdit.appendPlainText(data_type)
+	self.plainTextEdit.appendPlainText(data_type)
 	
 	self.comboBoxRes.clear()
 
@@ -104,7 +104,14 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	    maxdate.setDate(2013,12,31)
 	    self.startDate.setDate(mindate)
 	    self.endDate.setDate(maxdate)
-
+	if self.comboBoxDatasets.currentText() == 'AQUA MODIS Sea Surface Temperature':
+	    self.comboBoxRes.insertItems(0, ['9km', '4km'])
+	    mindate = QtCore.QDate()
+	    mindate.setDate(2002,7,4)
+	    maxdate = QtCore.QDate()
+	    maxdate.setDate(2013,12,31)
+	    self.startDate.setDate(mindate)
+	    self.endDate.setDate(maxdate)
 
 
     def open(self):

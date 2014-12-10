@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_oceandata.ui'
+# Form implementation generated from reading ui file '../../ui_oceandata.ui'
 #
-# Created: Thu Oct  2 17:02:21 2014
+# Created: Wed Dec 10 17:20:05 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,18 +56,6 @@ class Ui_OceanData(object):
         self.comboBoxDatasets.addItem(_fromUtf8(""))
         self.horizontalLayout_5.addWidget(self.comboBoxDatasets)
         self.gridLayout.addLayout(self.horizontalLayout_5, 1, 0, 1, 1)
-        self.infoTextEdit = QtGui.QPlainTextEdit(OceanData)
-        self.infoTextEdit.setEnabled(False)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.infoTextEdit.sizePolicy().hasHeightForWidth())
-        self.infoTextEdit.setSizePolicy(sizePolicy)
-        self.infoTextEdit.setMinimumSize(QtCore.QSize(0, 60))
-        self.infoTextEdit.setMaximumSize(QtCore.QSize(16777215, 60))
-        self.infoTextEdit.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.infoTextEdit.setObjectName(_fromUtf8("infoTextEdit"))
-        self.gridLayout.addWidget(self.infoTextEdit, 2, 0, 1, 1)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.label_6 = QtGui.QLabel(OceanData)
@@ -80,7 +68,7 @@ class Ui_OceanData(object):
         self.comboBoxTime.addItem(_fromUtf8(""))
         self.comboBoxTime.addItem(_fromUtf8(""))
         self.horizontalLayout.addWidget(self.comboBoxTime)
-        self.gridLayout.addLayout(self.horizontalLayout, 3, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 1, 1)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.label_2 = QtGui.QLabel(OceanData)
@@ -107,7 +95,7 @@ class Ui_OceanData(object):
         self.endDate.setDate(QtCore.QDate(2013, 12, 31))
         self.endDate.setObjectName(_fromUtf8("endDate"))
         self.horizontalLayout_2.addWidget(self.endDate)
-        self.gridLayout.addLayout(self.horizontalLayout_2, 4, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 3, 0, 1, 1)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.label_3 = QtGui.QLabel(OceanData)
@@ -121,7 +109,7 @@ class Ui_OceanData(object):
         self.comboBoxRes.setSizePolicy(sizePolicy)
         self.comboBoxRes.setObjectName(_fromUtf8("comboBoxRes"))
         self.horizontalLayout_3.addWidget(self.comboBoxRes)
-        self.gridLayout.addLayout(self.horizontalLayout_3, 5, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_3, 4, 0, 1, 1)
         self.horizontalLayout_4 = QtGui.QHBoxLayout()
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
         self.label = QtGui.QLabel(OceanData)
@@ -134,9 +122,9 @@ class Ui_OceanData(object):
         self.toolButton = QtGui.QToolButton(OceanData)
         self.toolButton.setObjectName(_fromUtf8("toolButton"))
         self.horizontalLayout_4.addWidget(self.toolButton)
-        self.gridLayout.addLayout(self.horizontalLayout_4, 6, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_4, 5, 0, 1, 1)
         self.plainTextEdit = QtGui.QPlainTextEdit(OceanData)
-        self.plainTextEdit.setEnabled(False)
+        self.plainTextEdit.setEnabled(True)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(2)
         sizePolicy.setVerticalStretch(2)
@@ -144,16 +132,21 @@ class Ui_OceanData(object):
         self.plainTextEdit.setSizePolicy(sizePolicy)
         self.plainTextEdit.setMinimumSize(QtCore.QSize(0, 180))
         self.plainTextEdit.setBaseSize(QtCore.QSize(0, 0))
+        self.plainTextEdit.setReadOnly(True)
         self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
         self.gridLayout.addWidget(self.plainTextEdit, 7, 0, 1, 1)
         self.btnDownload = QtGui.QPushButton(OceanData)
         self.btnDownload.setObjectName(_fromUtf8("btnDownload"))
         self.gridLayout.addWidget(self.btnDownload, 8, 0, 1, 1)
+        self.checkBoxCanvas = QtGui.QCheckBox(OceanData)
+        self.checkBoxCanvas.setObjectName(_fromUtf8("checkBoxCanvas"))
+        self.gridLayout.addWidget(self.checkBoxCanvas, 6, 0, 1, 1)
 
         self.retranslateUi(OceanData)
         QtCore.QObject.connect(self.btnDownload, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.accept)
         QtCore.QObject.connect(self.toolButton, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.open)
         QtCore.QObject.connect(self.comboBoxDatasets, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), OceanData.show)
+        QtCore.QObject.connect(self.checkBoxCanvas, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), OceanData.show)
         QtCore.QMetaObject.connectSlotsByName(OceanData)
 
     def retranslateUi(self, OceanData):
@@ -176,4 +169,5 @@ class Ui_OceanData(object):
         self.label.setText(_translate("OceanData", "Download to:", None))
         self.toolButton.setText(_translate("OceanData", "...", None))
         self.btnDownload.setText(_translate("OceanData", "Download", None))
+        self.checkBoxCanvas.setText(_translate("OceanData", "Add to canvas", None))
 
