@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Wed Dec 10 20:55:55 2014
+# Created: Thu Dec 11 13:17:00 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -152,7 +152,7 @@ class Ui_OceanData(object):
         OceanData.setWindowTitle(_translate("OceanData", "OceanData", None))
         self.label_5.setText(_translate("OceanData", "NASA Oceancolor Downloader", None))
         self.label_4.setText(_translate("OceanData", "Dataset:", None))
-        self.comboBoxDatasets.setItemText(0, _translate("OceanData", "Choose a dataset", None))
+        self.comboBoxDatasets.setItemText(0, _translate("OceanData", " ", None))
         self.comboBoxDatasets.setItemText(1, _translate("OceanData", "AQUA MODIS Chlorophyll Concentration", None))
         self.comboBoxDatasets.setItemText(2, _translate("OceanData", "SeaWiFS Chlorophyll Concentration", None))
         self.comboBoxDatasets.setItemText(3, _translate("OceanData", "AQUA MODIS Sea Surface Temperature", None))

@@ -53,9 +53,8 @@ class DownloadThread(QtCore.QThread):
         self.emit( QtCore.SIGNAL('update(QString)'), text )
  
     def run(self):
-	self.log("Dataset: {0}km {1} {2}".format(self.res, self.time_period, self.datatype))
-	self.log("Range: {0} to {1}".format(self.mindate, self.maxdate))
-	self.log("Downloading to: {}".format(self.path))
+	self.log(" ")
+	self.log("Downloading...")
 	C = downloader.get(self.datatype)
 	d = C(self.mindate, self.maxdate, self.res, self.time_period)
 	self.tifs = d.download(self.path)
@@ -69,19 +68,14 @@ class DownloadThread(QtCore.QThread):
 class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
     def __init__(self):
         QtGui.QDialog.__init__(self)
-        # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doing
-        # self.<objectname>, and you can use autoconnect slots - see
-        # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
-        # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 	self.iface = iface
 
 	self.data_desc = {
 		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
 		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
-		'Choose a dataset': '',
-		'AQUA MODIS Sea Surface Temperature': 'Sea Surface Temps \nNot working yet.',
+		' ': '',
+		'AQUA MODIS Sea Surface Temperature': 'Sea Surface Temperatures \nNot working yet.',
 	}
 
     

@@ -203,12 +203,19 @@ class Mnsst:
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(scaled)
 		
+		outdataqual = gdal.GetDriverByName("GTiff")
+		dst_ds = outdataqual.Create(outname.replace('.tif', '_qual.tif'), rows, cols, 1, gdal.GDT_Byte)
+		band = dst_ds.GetRasterBand(1)
+		dst_ds.SetGeoTransform(self.geo)
+		dst_ds.SetProjection(self.outproj.ExportToWkt())
+		band.WriteArray(qualarr)
+		
 		return outname
 
 
 if __name__ == "__main__":
-	sd = datetime(2006, 12, 15)
-	ed = datetime(2006, 12, 30)
-	d = Mnsst(sd, ed, 9, 'Annual')
-	x = d.download('/Users/Ireland/rsr/qgis-dev/')
+	sd = datetime(2003, 12, 15)
+	ed = datetime(2003, 12, 30)
+	d = Mnsst(sd, ed, 9, '8 day')
+	x = d.download('/Users/Ireland/rsr/qgis-dev/qual/')
 	print x
