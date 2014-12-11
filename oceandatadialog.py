@@ -25,6 +25,9 @@ import time
 
 from PyQt4 import QtCore, QtGui
 from ui_oceandata import Ui_OceanData
+from qgis.utils import iface
+from styles import sst_style, makeqml
+import os
 # create the dialog for zoom to point
 
 
@@ -53,11 +56,11 @@ class DownloadThread(QtCore.QThread):
 	self.log("Downloading to: {}".format(self.path))
         C = downloader.get(self.datatype)
 	d = C(self.mindate, self.maxdate, self.res, self.time_period)
-	x = d.download(self.path)
-	if x is not 0:
-		for f in x:
-			self.log("Failed: {}".format(f))
-	self.log("Downloaded.".format(self.path))
+	self.tifs = d.download(self.path)
+	if len(self.tifs[1]) > 0:
+	    for f in self.tifs[1]:
+	        self.log("Failed: {}".format(f))
+	self.log("Complete.".format(self.path))
 
 
 
@@ -70,6 +73,8 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
+	self.iface = iface
+
 	self.data_desc = {
 		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
 		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
@@ -120,6 +125,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.txtPath.setText(self.fileDialog.getExistingDirectory())
 
     def accept(self):
+	self.btnDownload.setEnabled(False)
         mindate  = self.startDate.date()
         maxdate  = self.endDate.date()
         path     = self.txtPath.text()
@@ -127,9 +133,34 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	res      = int(res.replace('km', ''))
 	datatype = self.comboBoxDatasets.currentText()
 	period   = self.comboBoxTime.currentText()
+	
+	if path == "":
+	    self.plainTextEdit.appendPlainText("Error: Enter a download directory.")
+	    self.btnDownload.setEnabled(True)
+	else:
+            self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
+            self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
+            self.downloadThread.start()
+	    self.connect(self.downloadThread, QtCore.SIGNAL('finished()'), self.addlayers)
 
-        self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
-        self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
-        self.downloadThread.start()
 
+    def addlayers(self):
+	self.btnDownload.setEnabled(True)
+
+        if self.checkBoxCanvas.isChecked() == True and hasattr(self.downloadThread, 'tifs'):
+	    tifs = self.downloadThread.tifs[0]
+	    if len(tifs) > 0:
+
+                for t in tifs:
+                    self.iface.addRasterLayer(t)
+	    
+	        layers = self.iface.legendInterface().layers()
+	        pth = os.path.dirname(tifs[0])
+	        qml = makeqml(pth, sst_style)
+
+	        for l in layers:
+		    l.loadNamedStyle(qml)
+		    self.iface.legendInterface().refreshLayerSymbology(l)
+	
+	    os.remove(qml)
 

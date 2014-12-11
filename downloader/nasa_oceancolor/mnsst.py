@@ -35,21 +35,24 @@ class Mnsst:
 		This downloads
 	
 		"""
-		failed_files = []
 		self.path = path
 		filenames = self.__createfilenames()
 		print filenames
+		tiffiles = [[],[]]
+
+		#IMPORTANT: this doesnt work because of failed files vs tiffiles
+		#figure out how to fix this...
+		#maybe return [[tiffiles][failedfiles]]
 		for f in filenames:
 			f_uncompress = self.__extract(f)
 			if not f_uncompress == 1:
-				self.__process(f_uncompress)
+				tif = self.__process(f_uncompress)
+				tiffiles[0].append(tif)
+				print tiffiles
 			else:
-				failed_files.append(f)
+				tiffiles[1].append(f)
 		
-		if len(failed_files) >= 1:
-			return failed_files
-		else:
-			return 0
+		return tiffiles
 
 
 	def __createfilenames(self):
@@ -204,10 +207,13 @@ class Mnsst:
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(scaled)
+		print outname
+		return outname
 
 
 if __name__ == "__main__":
-	sd = datetime(2004, 12, 15)
-	ed = datetime(2004, 12, 30)
-	d = Mnsst(sd, ed, 9, '8 day')
-	d.download('/Users/Ireland/rsr/qgis-dev/')
+	sd = datetime(2006, 12, 15)
+	ed = datetime(2006, 12, 30)
+	d = Mnsst(sd, ed, 9, 'Annual')
+	x = d.download('/Users/Ireland/rsr/qgis-dev/')
+	print x

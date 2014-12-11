@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '../../ui_oceandata.ui'
+# Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Wed Dec 10 17:20:05 2014
+# Created: Wed Dec 10 20:55:55 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -146,7 +146,6 @@ class Ui_OceanData(object):
         QtCore.QObject.connect(self.btnDownload, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.accept)
         QtCore.QObject.connect(self.toolButton, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.open)
         QtCore.QObject.connect(self.comboBoxDatasets, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), OceanData.show)
-        QtCore.QObject.connect(self.checkBoxCanvas, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), OceanData.show)
         QtCore.QMetaObject.connectSlotsByName(OceanData)
 
     def retranslateUi(self, OceanData):
