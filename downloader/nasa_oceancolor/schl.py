@@ -1,4 +1,3 @@
-from datetime import date
 from datetime import timedelta
 from datetime import datetime
 import urllib2
@@ -36,20 +35,19 @@ class Schl:
 		This downloads
 	
 		"""
-		failed_files = []
 		self.path = path
 		filenames = self.__createfilenames()
+		tiffiles = [[],[]]
+
 		for f in filenames:
 			f_uncompress = self.__extract(f)
 			if not f_uncompress == 1:
-				self.__process(f_uncompress)
+				tif = self.__process(f_uncompress)
+				tiffiles[0].append(tif)
 			else:
-				failed_files.append(f)
-
-		if len(failed_files) >= 1:
-			return failed_files
-		else:
-			return 0
+				tiffiles[1].append(f)
+		print tiffiles
+		return tiffiles
 
 
 	def __createfilenames(self):
@@ -100,7 +98,7 @@ class Schl:
 			for dr in date_ref:
 				if int(doy) in dr:
 					doy = min(dr)
-					d = date(d.year, 1, 1) + timedelta(doy -1) 
+					d = datetime(d.year, 1, 1) + timedelta(doy -1) 
 			while d <= self.end_date:
 				doy = d.strftime('%j')
 				if d.year in leap_years:
@@ -192,10 +190,12 @@ class Schl:
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(arr)
 
+		return outname
+
 
 if __name__ == "__main__":
-	sd = datetime(2008, 9, 10)
-	ed = datetime(2008, 9, 27)
-	d = Chlsw(sd, ed, 9, '8 day')
-	d.download('/Users/Ireland/rsr/qgis-dev/test_failures/')
+	sd = datetime(2008, 2, 9)
+	ed = datetime(2008, 4, 13)
+	d = Schl(sd, ed, 9, '8 day')
+	d.download('/Users/Ireland/rsr/qgis-dev/')
 

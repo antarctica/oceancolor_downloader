@@ -1,3 +1,26 @@
+chl_style = """
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="2.4.0-Chugiak" minimumScale="0" maximumScale="1e+08" hasScaleBasedVisibilityFlag="0">
+  <pipe>
+    <rasterrenderer opacity="1" alphaBand="0" classificationMax="1.44451" classificationMinMaxOrigin="CumulativeCutFullExtentEstimated" band="1" classificationMin="0.01504" type="singlebandpseudocolor">
+      <rasterTransparency/>
+      <rastershader>
+        <colorrampshader colorRampType="INTERPOLATED" clip="0">
+          <item alpha="255" value="0.01504" label="0.015040" color="#0000ff"/>
+          <item alpha="255" value="0.486765" label="0.486765" color="#02ff00"/>
+          <item alpha="255" value="0.95849" label="0.958490" color="#fffa00"/>
+          <item alpha="255" value="1.44451" label="1.444510" color="#ff0000"/>
+        </colorrampshader>
+      </rastershader>
+    </rasterrenderer>
+    <brightnesscontrast brightness="0" contrast="-6"/>
+    <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+    <rasterresampler maxOversampling="2"/>
+  </pipe>
+  <blendMode>0</blendMode>
+</qgis>
+"""
+
 sst_style = """
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
 <qgis version="2.4.0-Chugiak" minimumScale="0" maximumScale="1e+08" hasScaleBasedVisibilityFlag="0">

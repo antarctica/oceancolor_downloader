@@ -22,11 +22,11 @@
 
 from downloader import downloader
 import time
-
+from datetime import datetime
 from PyQt4 import QtCore, QtGui
 from ui_oceandata import Ui_OceanData
 from qgis.utils import iface
-from styles import sst_style, makeqml
+from downloader import style_pick 
 import os
 # create the dialog for zoom to point
 
@@ -36,7 +36,9 @@ class DownloadThread(QtCore.QThread):
     def __init__(self, path, mindate, maxdate, res, time_period, datatype):
         self.path    = '{}/'.format(path)
         self.mindate = mindate.toPyDate()
+	self.mindate = datetime.combine(self.mindate, datetime.min.time())
         self.maxdate = maxdate.toPyDate()
+	self.maxdate = datetime.combine(self.maxdate, datetime.min.time())
 	self.res     = res
 	self.datatype = datatype
 	self.time_period = time_period
@@ -54,7 +56,7 @@ class DownloadThread(QtCore.QThread):
 	self.log("Dataset: {0}km {1} {2}".format(self.res, self.time_period, self.datatype))
 	self.log("Range: {0} to {1}".format(self.mindate, self.maxdate))
 	self.log("Downloading to: {}".format(self.path))
-        C = downloader.get(self.datatype)
+	C = downloader.get(self.datatype)
 	d = C(self.mindate, self.maxdate, self.res, self.time_period)
 	self.tifs = d.download(self.path)
 	if len(self.tifs[1]) > 0:
@@ -101,6 +103,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	    maxdate.setDate(2010,12,11)
 	    self.startDate.setDate(mindate)
 	    self.endDate.setDate(maxdate)
+
 	if self.comboBoxDatasets.currentText() == 'AQUA MODIS Chlorophyll Concentration':
 	    self.comboBoxRes.insertItems(0, ['9km', '4km'])
 	    mindate = QtCore.QDate()
@@ -132,6 +135,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         res      = self.comboBoxRes.currentText()
 	res      = int(res.replace('km', ''))
 	datatype = self.comboBoxDatasets.currentText()
+	self.style = style_pick.get(datatype)
 	period   = self.comboBoxTime.currentText()
 	
 	if path == "":
@@ -156,7 +160,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	    
 	        layers = self.iface.legendInterface().layers()
 	        pth = os.path.dirname(tifs[0])
-	        qml = makeqml(pth, sst_style)
+	        qml = style_pick.makeqml(pth, self.style)
 
 	        for l in layers:
 		    l.loadNamedStyle(qml)

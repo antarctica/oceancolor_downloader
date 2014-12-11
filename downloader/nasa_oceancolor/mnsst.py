@@ -1,5 +1,4 @@
 from datetime import datetime
-from datetime import date
 from datetime import timedelta
 import urllib2
 import bz2
@@ -37,18 +36,14 @@ class Mnsst:
 		"""
 		self.path = path
 		filenames = self.__createfilenames()
-		print filenames
 		tiffiles = [[],[]]
 
-		#IMPORTANT: this doesnt work because of failed files vs tiffiles
-		#figure out how to fix this...
-		#maybe return [[tiffiles][failedfiles]]
+		# return [[tiffiles][failedfiles]]
 		for f in filenames:
 			f_uncompress = self.__extract(f)
 			if not f_uncompress == 1:
 				tif = self.__process(f_uncompress)
 				tiffiles[0].append(tif)
-				print tiffiles
 			else:
 				tiffiles[1].append(f)
 		
@@ -207,7 +202,7 @@ class Mnsst:
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(scaled)
-		print outname
+		
 		return outname
 
 

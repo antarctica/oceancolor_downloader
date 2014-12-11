@@ -1,5 +1,4 @@
 from datetime import datetime
-from datetime import date
 from datetime import timedelta
 import urllib2
 import bz2
@@ -37,20 +36,19 @@ class Mchl:
 		This downloads
 	
 		"""
-		failed_files = []
 		self.path = path
 		filenames = self.__createfilenames()
+		tiffiles = [[],[]]
+
 		for f in filenames:
 			f_uncompress = self.__extract(f)
 			if not f_uncompress == 1:
-				self.__process(f_uncompress)
+				tif = self.__process(f_uncompress)
+				tiffiles[0].append(tif)
 			else:
-				failed_files.append(f)
+				tiffiles[1].append(f)
 		
-		if len(failed_files) >= 1:
-			return failed_files
-		else:
-			return 0
+		return tiffiles
 
 
 	def __createfilenames(self):
@@ -101,7 +99,7 @@ class Mchl:
 			for dr in date_ref:
 				if int(doy) in dr:
 					doy = min(dr)
-					d = date(d.year, 1, 1) + timedelta(doy - 1)
+					d = datetime(d.year, 1, 1) + timedelta(doy - 1)
 			while d <= self.end_date:
 				doy = d.strftime('%j')
 				if d.year in leap_years:
@@ -190,6 +188,7 @@ class Mchl:
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(arr)
+		return outname
 
 
 if __name__ == "__main__":
