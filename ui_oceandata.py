@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Thu Dec 11 13:17:00 2014
+# Created: Thu Dec 11 13:28:58 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -136,6 +136,7 @@ class Ui_OceanData(object):
         self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
         self.gridLayout.addWidget(self.plainTextEdit, 7, 0, 1, 1)
         self.btnDownload = QtGui.QPushButton(OceanData)
+        self.btnDownload.setEnabled(False)
         self.btnDownload.setObjectName(_fromUtf8("btnDownload"))
         self.gridLayout.addWidget(self.btnDownload, 8, 0, 1, 1)
         self.checkBoxCanvas = QtGui.QCheckBox(OceanData)
