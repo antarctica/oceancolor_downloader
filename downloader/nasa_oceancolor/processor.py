@@ -97,7 +97,6 @@ class Processor():
                                         mindoy = int(doy)
                                         maxdoy = max(date_ref[mindoy])
                                         filenames.append(self.fns['fn_8day'].format(d.year, mindoy, maxdoy, self.res))
-                                        print filenames
 					if mindoy == 361:
 						d = d + relativedelta(days=6)
                                         else:
@@ -108,7 +107,6 @@ class Processor():
                                         mindoy = int(doy)
                                         maxdoy = max(date_ref[mindoy])
                                         filenames.append(self.fns['fn_8day'].format(d.year, mindoy, maxdoy, self.res))
-                                        print filenames
 					if mindoy == 361:
                                                 d = d + relativedelta(days=5)
                                         else:

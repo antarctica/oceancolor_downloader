@@ -1,5 +1,4 @@
 from datetime import datetime
-from datetime import timedelta
 from osgeo import gdal
 from osgeo import osr
 import numpy as np
@@ -7,7 +6,7 @@ import os
 from processor import Processor
 
 
-class Mnsst(Processor):
+class Mnsst():
 
 	def __init__(self, start_date, end_date, res, time_composite='Annual'):
 		
