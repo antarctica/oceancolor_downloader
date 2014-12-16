@@ -19,7 +19,7 @@ class Mchl:
 		self.res            = res
 		self.time_composite = time_composite
 
-		self.fns = {'fn_annual': 'A{0}001{0}366.L3m_YR_CHL_chlor_a_{1}km',
+		self.fns = {'fn_annual': 'A{0}001{0}{1}.L3m_YR_CHL_chlor_a_{2}km',
                                 'fn_monthly': 'A{0}{1}{0}{2}.L3m_MO_CHL_chlor_a_{3}km',
 				'fn_8day': 'A{0}{1:0>3}{0}{2:0>3}.L3m_8D_CHL_chlor_a_{3}km',
                                 'fn_daily': 'A{0}{1}.L3m_DAY_CHL_chlor_a_{2}km',

@@ -26,22 +26,24 @@ class Processor():
                 Method to download and extract a file 
                 """
                 f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(os.path.basename(targetfile))
-                f_compress = '{}.bz2'.format(targetfile)
+                print f_download
+		f_compress = '{}.bz2'.format(targetfile)
                 f_uncompress = targetfile
+		print 'f_uncompress', f_uncompress
 
 
-                try:
-                        thefile = urllib2.urlopen(f_download)
-                        f = open(f_compress, 'wb')
-                        f.write(thefile.read())
-                        f.close()
-                        uncom = bz2.BZ2File(f_compress, 'r').read()
-                        output = open(f_uncompress, 'w')
-                        output.write(uncom)
-                        output.close()
-                        return f_uncompress
+		try:
+                	thefile = urllib2.urlopen(f_download)
+                	f = open(f_compress, 'wb')
+                	f.write(thefile.read())
+              	  	f.close()
+                	uncom = bz2.BZ2File(f_compress, 'r').read()
+               	 	output = open(f_uncompress, 'w')
+                	output.write(uncom)
+                	output.close()
+                	return f_uncompress
 
-                except:
+	        except:
                         return 1
 
 
@@ -63,9 +65,9 @@ class Processor():
 
                         for year in range(minyear, maxyear + 1):
                                 if year in leap_years:
-                                        filenames.append(self.fns['fn_annual'].format(year, self.res))
+                                        filenames.append(self.fns['fn_annual'].format(year, 366, self.res))
                                 else:
-                                        filenames.append(self.fns['fn_annual'].format(year, self.res))
+                                        filenames.append(self.fns['fn_annual'].format(year, 365, self.res))
 
 
                 if self.time_composite == 'Monthly':

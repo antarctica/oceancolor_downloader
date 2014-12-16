@@ -15,7 +15,7 @@ class Mnsst():
 		self.res            = res
 		self.time_composite = time_composite
 
-		self.fns = {'fn_annual': 'A{0}001{0}366.L3m_YR_NSST_{1}',
+		self.fns = {'fn_annual': 'A{0}001{0}{1}.L3m_YR_NSST_{2}',
 				'fn_monthly': 'A{0}{1}{0}{2}.L3m_MO_NSST_{3}',
 				'fn_8day': 'A{0}{1:0>3}{0}{2:0>3}.L3m_8D_NSST_{3}',
 				'fn_daily': 'A{0}{1}.L3m_DAY_NSST_{2}',
