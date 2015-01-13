@@ -26,10 +26,8 @@ class Processor():
                 Method to download and extract a file 
                 """
                 f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(os.path.basename(targetfile))
-                print f_download
 		f_compress = '{}.bz2'.format(targetfile)
                 f_uncompress = targetfile
-		print 'f_uncompress', f_uncompress
 
 
 		try:
@@ -37,8 +35,8 @@ class Processor():
                 	f = open(f_compress, 'wb')
                 	f.write(thefile.read())
               	  	f.close()
-                	uncom = bz2.BZ2File(f_compress, 'r').read()
-               	 	output = open(f_uncompress, 'w')
+                	uncom = bz2.BZ2File(f_compress, 'rb').read()
+               	 	output = open(f_uncompress, 'wb')
                 	output.write(uncom)
                 	output.close()
                 	return f_uncompress
