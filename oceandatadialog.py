@@ -128,14 +128,14 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 
     def accept(self):
 	self.btnDownload.setEnabled(False)
-        mindate  = self.startDate.date()
-        maxdate  = self.endDate.date()
-        path     = self.txtPath.text()
-        res      = self.comboBoxRes.currentText()
-	res      = int(res.replace('km', ''))
-	datatype = self.comboBoxDatasets.currentText()
+        mindate    = self.startDate.date()
+        maxdate    = self.endDate.date()
+        path       = self.txtPath.text()
+        res        = self.comboBoxRes.currentText()
+	res        = int(res.replace('km', ''))
+	datatype   = self.comboBoxDatasets.currentText()
 	self.style = style_pick.get(datatype)
-	period   = self.comboBoxTime.currentText()
+	period     = self.comboBoxTime.currentText()
 	
 	if path == "":
 	    self.plainTextEdit.appendPlainText("Error: Enter a download directory.")
@@ -153,17 +153,20 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         if self.checkBoxCanvas.isChecked() == True and hasattr(self.downloadThread, 'tifs'):
 	    tifs = self.downloadThread.tifs[0]
 	    if len(tifs) > 0:
-
-                for t in tifs:
+                justnames = []
+		for t in tifs:
                     self.iface.addRasterLayer(t)
-	    
+		    n = os.path.basename(t).replace('.tif', '')
+		    justnames.append(n)
+
 	        layers = self.iface.legendInterface().layers()
 	        pth = os.path.dirname(tifs[0])
 	        qml = style_pick.makeqml(pth, self.style)
 
 	        for l in layers:
-		    l.loadNamedStyle(qml)
-		    self.iface.legendInterface().refreshLayerSymbology(l)
+	            if l.name() in justnames:
+		        l.loadNamedStyle(qml)
+		        self.iface.legendInterface().refreshLayerSymbology(l)
 	
 	    os.remove(qml)
 
