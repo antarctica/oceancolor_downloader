@@ -7,6 +7,10 @@ from processor import Processor
 
 
 class Mnsst():
+	"""
+	Deals with download and geotiff output of AQUA MODIS NSST
+
+	"""
 
 	def __init__(self, start_date, end_date, res, time_composite='Annual'):
 		
@@ -36,7 +40,9 @@ class Mnsst():
 
 	def download(self, path):
 		"""
-		This downloads
+		Input: path to download files to.
+		
+		Downloads relevant HDFs and converts to geotiff
 	
 		"""
 		self.path = os.path.abspath(path)
@@ -59,8 +65,11 @@ class Mnsst():
 
 	def __process(self, targetfile):
 		"""
-		This processes the uncompressed file downloaded 
-		in self.__extract()
+		Converts HDF to GEOTIFFs. 
+		Input: .hdf file
+
+		Inserts metadata tags to output geotiff
+
 		"""
 		outname = '{0}.tif'.format(targetfile)
 		g    = gdal.Open(targetfile)

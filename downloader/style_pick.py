@@ -1,5 +1,6 @@
 from styles import chl_style, sst_style
 
+# Creates .qml files for styling of rasters. 
 
 __styles = {
         'AQUA MODIS Sea Surface Temperature': sst_style,
