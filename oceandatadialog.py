@@ -28,8 +28,6 @@ from ui_oceandata import Ui_OceanData
 from qgis.utils import iface
 from downloader import style_pick 
 import os
-# create the dialog for zoom to point
-
 
 
 class DownloadThread(QtCore.QThread):
@@ -75,7 +73,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
 		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
 		' ': '',
-		'AQUA MODIS Sea Surface Temperature': 'Sea Surface Temperatures \nNot working yet.',
+		'AQUA MODIS Sea Surface Temperature': 'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present',
 	}
 
     
@@ -90,6 +88,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 
 	self.plainTextEdit.clear()
         data_type = self.data_desc[self.comboBoxDatasets.currentText()]
+	self.plainTextEdit.appendPlainText('For full details of source datasets, refer to http://oceancolor.gsfc.nasa.gov/\n')
 	self.plainTextEdit.appendPlainText(data_type)
 	
 	self.comboBoxRes.clear()
