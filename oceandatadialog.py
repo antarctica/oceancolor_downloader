@@ -52,14 +52,17 @@ class DownloadThread(QtCore.QThread):
  
     def run(self):
 	self.log(" ")
-	self.log("Downloading...")
-	C = downloader.get(self.datatype)
-	d = C(self.mindate, self.maxdate, self.res, self.time_period)
-	self.tifs = d.download(self.path)
-	if len(self.tifs[1]) > 0:
-	    for f in self.tifs[1]:
-	        self.log("Failed: {}".format(f))
-	self.log("Complete.".format(self.path))
+	if self.mindate > self.maxdate:
+            self.log("Error: Invalid date range.\n")
+        else:
+	    self.log("Downloading...")
+	    C = downloader.get(self.datatype)
+	    d = C(self.mindate, self.maxdate, self.res, self.time_period)
+	    self.tifs = d.download(self.path)
+	    if len(self.tifs[1]) > 0:
+	        for f in self.tifs[1]:
+	            self.log("Unable to download file: {}. Does not exist".format(f))
+	    self.log("Complete.".format(self.path))
 
 
 
@@ -93,31 +96,36 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	
 	self.comboBoxRes.clear()
 
+	mindate_sc = QtCore.QDate()
+	mindate_sc.setDate(1997,9,4)
+	maxdate_sc = QtCore.QDate()
+	maxdate_sc.setDate(2010,12,11)
+	
+	mindate_mc = QtCore.QDate()
+        mindate_mc.setDate(2002,7,4)
+	maxdate_mc = QtCore.QDate()
+	maxdate_mc = maxdate_mc.currentDate()
+
 	if self.comboBoxDatasets.currentText() == 'SeaWiFS Chlorophyll Concentration':
 	    self.comboBoxRes.insertItem(0, '9km')
-	    mindate = QtCore.QDate()
-	    mindate.setDate(1997,9,4)
-	    maxdate = QtCore.QDate()
-	    maxdate.setDate(2010,12,11)
-	    self.startDate.setDate(mindate)
-	    self.endDate.setDate(maxdate)
+	    self.startDate.setDate(mindate_sc)
+	    self.startDate.setDateRange(mindate_sc, maxdate_sc)
+	    self.endDate.setDate(maxdate_sc)
+	    self.endDate.setDateRange(mindate_sc, maxdate_sc)
 
 	if self.comboBoxDatasets.currentText() == 'AQUA MODIS Chlorophyll Concentration':
 	    self.comboBoxRes.insertItems(0, ['9km', '4km'])
-	    mindate = QtCore.QDate()
-	    mindate.setDate(2002,7,4)
-	    maxdate = QtCore.QDate()
-	    maxdate.setDate(2013,12,31)
-	    self.startDate.setDate(mindate)
-	    self.endDate.setDate(maxdate)
+	    self.startDate.setDate(mindate_mc)
+	    self.startDate.setDateRange(mindate_mc, maxdate_mc)
+	    self.endDate.setDate(maxdate_mc)
+	    self.endDate.setDateRange(mindate_mc, maxdate_mc)
+
 	if self.comboBoxDatasets.currentText() == 'AQUA MODIS Sea Surface Temperature':
 	    self.comboBoxRes.insertItems(0, ['9km', '4km'])
-	    mindate = QtCore.QDate()
-	    mindate.setDate(2002,7,4)
-	    maxdate = QtCore.QDate()
-	    maxdate.setDate(2013,12,31)
-	    self.startDate.setDate(mindate)
-	    self.endDate.setDate(maxdate)
+	    self.startDate.setDate(mindate_mc)
+	    self.startDate.setDateRange(mindate_mc, maxdate_mc)
+	    self.endDate.setDate(maxdate_mc)
+	    self.endDate.setDateRange(mindate_mc, maxdate_mc)
 
 
     def open(self):
@@ -167,5 +175,5 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 		        l.loadNamedStyle(qml)
 		        self.iface.legendInterface().refreshLayerSymbology(l)
 	
-	    os.remove(qml)
+	        os.remove(qml)
 
