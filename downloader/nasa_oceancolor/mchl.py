@@ -104,6 +104,7 @@ class Mchl:
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(arr)
+		os.remove(targetfile)
 		return outname
 
 

@@ -39,6 +39,7 @@ class Processor():
                	 	output = open(f_uncompress, 'wb')
                 	output.write(uncom)
                 	output.close()
+			os.remove(f_compress)
                 	return f_uncompress
 
 	        except:

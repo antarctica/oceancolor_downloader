@@ -72,6 +72,7 @@ class Mnsst():
 
 		"""
 		outname = '{0}.tif'.format(targetfile)
+
 		g    = gdal.Open(targetfile)
 		sub  = g.GetSubDatasets()
 		sst  = gdal.Open(sub[0][0])
@@ -125,6 +126,7 @@ class Mnsst():
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
 		band.WriteArray(qualarr)
 		
+		os.remove(targetfile)
 		return outname
 
 
