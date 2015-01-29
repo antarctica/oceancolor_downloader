@@ -83,7 +83,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
     def log(self, text):
         self.plainTextEdit.appendPlainText(text)
 
-    def show(self):
+    def update(self):
 	if not self.comboBoxDatasets.currentText() == ' ':
 	    self.btnDownload.setEnabled(True)
 	else:

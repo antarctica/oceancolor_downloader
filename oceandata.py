@@ -72,5 +72,3 @@ class OceanData:
     def run(self):
         # show the dialog
         self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()

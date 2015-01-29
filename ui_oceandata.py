@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Tue Jan 27 11:57:34 2015
+# Created: Thu Jan 29 14:02:45 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -129,6 +129,7 @@ class Ui_OceanData(object):
         self.comboBoxDatasets.setEnabled(True)
         self.comboBoxDatasets.setObjectName(_fromUtf8("comboBoxDatasets"))
         self.comboBoxDatasets.addItem(_fromUtf8(""))
+        self.comboBoxDatasets.setItemText(0, _fromUtf8(""))
         self.comboBoxDatasets.addItem(_fromUtf8(""))
         self.comboBoxDatasets.addItem(_fromUtf8(""))
         self.comboBoxDatasets.addItem(_fromUtf8(""))
@@ -146,7 +147,7 @@ class Ui_OceanData(object):
         self.retranslateUi(OceanData)
         QtCore.QObject.connect(self.btnDownload, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.accept)
         QtCore.QObject.connect(self.toolButton, QtCore.SIGNAL(_fromUtf8("clicked()")), OceanData.open)
-        QtCore.QObject.connect(self.comboBoxDatasets, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), OceanData.show)
+        QtCore.QObject.connect(self.comboBoxDatasets, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), OceanData.update)
         QtCore.QMetaObject.connectSlotsByName(OceanData)
 
     def retranslateUi(self, OceanData):
@@ -168,7 +169,6 @@ class Ui_OceanData(object):
         self.comboBoxTime.setItemText(2, _translate("OceanData", "8 day", None))
         self.comboBoxTime.setItemText(3, _translate("OceanData", "Daily", None))
         self.label_4.setText(_translate("OceanData", "Dataset:", None))
-        self.comboBoxDatasets.setItemText(0, _translate("OceanData", " ", None))
         self.comboBoxDatasets.setItemText(1, _translate("OceanData", "AQUA MODIS Chlorophyll Concentration", None))
         self.comboBoxDatasets.setItemText(2, _translate("OceanData", "SeaWiFS Chlorophyll Concentration", None))
         self.comboBoxDatasets.setItemText(3, _translate("OceanData", "AQUA MODIS Sea Surface Temperature", None))
