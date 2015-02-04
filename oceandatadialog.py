@@ -64,10 +64,10 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.iface = iface
 
 	self.data_desc = {
-		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present',
-		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11',
-		' ': '',
-		'AQUA MODIS Sea Surface Temperature': 'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present',
+		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present\n',
+		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11\n',
+		' ': '\n',
+		'AQUA MODIS Sea Surface Temperature': 'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present\n',
 	}
 
     
@@ -126,7 +126,14 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 
     def accept(self):
 	self.btnDownload.setEnabled(False)
-        mindate    = self.startDate.date()
+        self.comboBoxDatasets.setEnabled(False)
+        self.comboBoxTime.setEnabled(False)
+	self.startDate.setEnabled(False)
+	self.endDate.setEnabled(False)
+	self.comboBoxRes.setEnabled(False)
+	self.toolButton.setEnabled(False)
+
+	mindate    = self.startDate.date()
         maxdate    = self.endDate.date()
         path       = self.txtPath.text()
         res        = self.comboBoxRes.currentText()
@@ -138,6 +145,12 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	if path == "":
 	    self.plainTextEdit.appendPlainText("Error: Enter a download directory.")
 	    self.btnDownload.setEnabled(True)
+	    self.comboBoxDatasets.setEnabled(True)
+            self.comboBoxTime.setEnabled(True)
+	    self.startDate.setEnabled(True)
+	    self.endDate.setEnabled(True)
+	    self.comboBoxRes.setEnabled(True)
+	    self.toolButton.setEnabled(True)
 	else:
             self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
             self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
@@ -147,8 +160,14 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 
     def addlayers(self):
 	self.btnDownload.setEnabled(True)
-
-        if self.checkBoxCanvas.isChecked() == True and hasattr(self.downloadThread, 'tifs'):
+	self.comboBoxDatasets.setEnabled(True)
+        self.comboBoxTime.setEnabled(True)
+	self.startDate.setEnabled(True)
+	self.endDate.setEnabled(True)
+	self.comboBoxRes.setEnabled(True)
+	self.toolButton.setEnabled(True)
+        
+	if self.checkBoxCanvas.isChecked() == True and hasattr(self.downloadThread, 'tifs'):
 	    tifs = self.downloadThread.tifs[0]
 	    if len(tifs) > 0:
                 justnames = []

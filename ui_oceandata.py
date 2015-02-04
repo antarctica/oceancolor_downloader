@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_oceandata.ui'
 #
-# Created: Thu Jan 29 14:02:45 2015
+# Created: Wed Feb  4 17:45:52 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -59,7 +59,9 @@ class Ui_OceanData(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout_4.addWidget(self.label)
         self.txtPath = QtGui.QLineEdit(OceanData)
+        self.txtPath.setEnabled(True)
         self.txtPath.setText(_fromUtf8(""))
+        self.txtPath.setReadOnly(True)
         self.txtPath.setObjectName(_fromUtf8("txtPath"))
         self.horizontalLayout_4.addWidget(self.txtPath)
         self.toolButton = QtGui.QToolButton(OceanData)
