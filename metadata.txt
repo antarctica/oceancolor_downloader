@@ -11,10 +11,10 @@
 [general]
 name=Ocean Data 
 qgisMinimumVersion=2.0
-description=Download oceanographic datasets
+description=Downloads oceancolor and sea surface temperature datasets form NASA Oceancolor.
 version=1.0
 author=Louise Ireland
-email=louireland@gmail.com
+email=louela@bas.ac.uk
 
 # end of mandatory metadata
 
@@ -25,7 +25,6 @@ email=louireland@gmail.com
 
 # tags are comma separated with spaces allowed
 tags=
-
 homepage=
 tracker=
 repository=

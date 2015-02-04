@@ -1,0 +1,16 @@
+CONTRIBUTING
+
+We welcome contributions from both other NERC centres and from external entities under the following guidelines:
+
+
+* These arei based on general guidelines used by default for projects that we make available, they do not represent any formal policy or notice.
+
+* The preferred method of integrating contributions is through a Git pull request.
+
+* The preferred method of raising issues is through the issue tracker for this repository, or by email (basmagic@bas.ac.uk).
+
+* If contributing code, please follow any defined coding standards where specified, or any obvious conventions implied within the code.
+
+
+Last updated: February 2015
+Contact address: basmagic@bas.ac.uk (BAS Mapping and Geographic Information Centre)

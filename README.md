@@ -43,9 +43,11 @@ The plugin requires QGIS version 2.0 or higher. It can be installed via the Plug
 
 If you have chosen to add the data to the canvas, it will appear styled once GeoTiff is created. Sea surface temperature data will also download a seperate quality grid, but this will not be added to the canvas. 
 
-WARNING: There are no warnings for large downloads in the current version. 
 
 ![SST](images/sst-map.png) 
+
+
+We are currently developing new features and working to improve existing ones. Please see the [repository wiki](https://github.com/lo-ise/oceancolor_downloader/wiki) for details. 
 
 
 ##Acknowledgements

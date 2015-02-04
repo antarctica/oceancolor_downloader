@@ -55,17 +55,17 @@ class OceanData:
         # Create action that will start plugin configuration
         self.action = QAction(
             QIcon(":/plugins/oceandata/icon.png"),
-            u"Ocean data", self.iface.mainWindow())
+            u"Oceancolor Downloader", self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu(u"&Ocean Data ", self.action)
+        self.iface.addPluginToMenu(u"&Oceancolor Downloader", self.action)
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu(u"&Ocean Data ", self.action)
+        self.iface.removePluginMenu(u"&Oceancolor Downloader", self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
