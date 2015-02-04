@@ -46,3 +46,14 @@ If you have chosen to add the data to the canvas, it will appear styled once Geo
 WARNING: There are no warnings for large downloads in the current version. 
 
 ![SST](images/sst-map.png) 
+
+
+##Acknowledgements
+
+The plugin was developed by the Mapping and Geographic Information Centre at [British Antarctic Survey](http://www.antarctica.ac.uk/). 
+
+Something about open source etc... see BASIS docs.
+
+
+![BAS logo](images/bas-logo.jpeg)
+![NERC logo](images/nerc-logo.jpg)
