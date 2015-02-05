@@ -2,7 +2,7 @@
 
 
 [general]
-name=Ocean Data 
+name=Oceancolor Data Downloader 
 qgisMinimumVersion=2.0
 description=Downloads oceancolor and sea surface temperature datasets form NASA Oceancolor.
 version=1.0
@@ -17,10 +17,10 @@ email=louela@bas.ac.uk
 # changelog=
 
 # tags are comma separated with spaces allowed
-tags=
-homepage=
-tracker=
-repository=
+tags=oceancolor,data,global,remote sensing
+homepage=http://antarctica.github.io/oceancolor_downloader
+tracker=https://github.com/antarctica/oceancolor_downloader/issues
+repository=https://github.com/antarctica/oceancolor_downloader
 icon=icon.png
 # experimental flag
 experimental=False
