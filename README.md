@@ -27,7 +27,7 @@ The plugin requires QGIS version 2.0 or higher. It can be installed via the Plug
 
 3. Add the following repository:
 
-    `LINK TO REPO`
+    `LINK TO REPO - TBC`
 
 4. Click on `New` to see all newly available plugins. 
 
@@ -53,8 +53,6 @@ We are currently developing new features and working to improve existing ones. P
 ##Acknowledgements
 
 The plugin was developed by the Mapping and Geographic Information Centre at [British Antarctic Survey](http://www.antarctica.ac.uk/). 
-
-Something about open source etc... see BASIS docs.
 
 
 ![BAS logo](images/bas-logo.jpeg)
