@@ -35,19 +35,31 @@ The plugin requires QGIS version 2.0 or higher. It can be installed via the Plug
 
 ##Using the plugin
 1. ![Toolbar button](images/icon-button.png)  Locate this icon on the toolbar and click it to open the plugin.
+
+ 
+
 ![Plugin interface](images/interface.png)
 
 2. Select a **dataset**, a **time period**, a **date range** and a **download path**. Select whether you wish to add the composite to the map canvas. 
 
 3. Click **Download**
 
-If you have chosen to add the data to the canvas, it will appear styled once GeoTiff is created. Sea surface temperature data will also download a seperate quality grid, but this will not be added to the canvas. 
+If you have chosen to add the data to the canvas, it will appear styled once the GeoTiff is created. Sea surface temperature data will also include a seperate quality grid, but this will not be added to the canvas. 
 
 
 ![SST](images/sst-map.png) 
 
 
-We are currently developing new features and working to improve existing ones. Please see the [repository wiki](https://github.com/lo-ise/oceancolor_downloader/wiki) for details. 
+##Future developments
+
+We are currently developing new features and working to improve existing ones. A selection of features we are looking to include in a future release are as follows:
+
+* Alternative output file formats
+* Options to subset output data to a lat/long bounding box
+* Other datasets, such as [Net Primary Production](http://www.science.oregonstate.edu/ocean.productivity/)
+* Progress bar
+* 'Cancel Download' button
+* Warnings/notifications on amount of data selected to download
 
 
 ##Acknowledgements
