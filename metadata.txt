@@ -5,6 +5,7 @@
 name=Oceancolor Data Downloader 
 qgisMinimumVersion=2.0
 description=Downloads oceancolor and sea surface temperature datasets form NASA Oceancolor.
+about=The plugin downloads either global level 3 mapped chlorophyll-a concentrations or sea surface temperatures within a defined time range, and resolution. The data is saved in GeoTiff format and can be added to the QGIS canvas once downloaded. This plugin was developed by the Mapping and Geographic Information Centre at British Antarctic Survey. 
 version=1.0
 author=Louise Ireland
 email=louela@bas.ac.uk
