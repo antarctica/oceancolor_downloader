@@ -125,6 +125,8 @@ class Mnsst():
 		dst_ds.SetGeoTransform(self.geo)
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
 		band.WriteArray(qualarr)
+
+		g = None
 		
 		os.remove(targetfile)
 		return outname

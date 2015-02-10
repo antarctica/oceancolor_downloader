@@ -56,6 +56,7 @@ class Schl:
 				tiffiles[0].append(tif)
 			else:
 				tiffiles[1].append(os.path.basename(f))
+
 		return tiffiles
 
 
@@ -103,7 +104,9 @@ class Schl:
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
 		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(arr)
-		
+
+		g = None
+
 		os.remove(targetfile)
 		return outname
 
