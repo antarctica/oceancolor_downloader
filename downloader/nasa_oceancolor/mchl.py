@@ -110,10 +110,3 @@ class Mchl:
 		
 		return outname
 
-
-if __name__ == "__main__":
-	sd = datetime(2004, 12, 01)
-	ed = datetime(2004, 12, 15)
-	d = Mchl(sd, ed, 9, '8 day')
-	x = d.download('/Users/Ireland/rsr/qgis-dev/ref/')
-	print x

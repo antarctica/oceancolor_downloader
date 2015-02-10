@@ -126,15 +126,11 @@ class Mnsst():
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
 		band.WriteArray(qualarr)
 
-		g = None
+		g    = None
+		sub  = None
+		sst  = None
+		qual = None
 		
 		os.remove(targetfile)
 		return outname
 
-
-if __name__ == "__main__":
-	sd = datetime(2003, 12, 15)
-	ed = datetime(2003, 12, 30)
-	d = Mnsst(sd, ed, 9, 'Annual')
-	x = d.download('/Users/Ireland/rsr/qgis-dev/ref/')
-	print x

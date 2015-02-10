@@ -110,10 +110,3 @@ class Schl:
 		os.remove(targetfile)
 		return outname
 
-
-if __name__ == "__main__":
-	sd = datetime(2008, 2, 9)
-	ed = datetime(2008, 4, 13)
-	d = Schl(sd, ed, 9, '8 day')
-	d.download('/Users/Ireland/rsr/qgis-dev/ref/')
-
