@@ -3,7 +3,7 @@ CONTRIBUTING
 We welcome contributions from both other NERC centres and from external entities under the following guidelines:
 
 
-* These arei based on general guidelines used by default for projects that we make available, they do not represent any formal policy or notice.
+* These are based on general guidelines used by default for projects that we make available, they do not represent any formal policy or notice.
 
 * The preferred method of integrating contributions is through a Git pull request.
 
