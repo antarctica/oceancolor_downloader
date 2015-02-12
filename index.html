@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Oceancolor Data Downloader v1.0 by antarctica</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Oceancolor Data Downloader v1.0</h1>
+        <p>QGIS plugin to download data from NASA Oceancolor</p>
+
+        <p class="view"><a href="https://github.com/antarctica/oceancolor_downloader">View the Project on GitHub <small>antarctica/oceancolor_downloader</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/antarctica/oceancolor_downloader/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/antarctica/oceancolor_downloader/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/antarctica/oceancolor_downloader">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="what-it-does" class="anchor" href="#what-it-does" aria-hidden="true"><span class="octicon octicon-link"></span></a>What it does</h2>
+
+<p>This is a QGIS Plugin which allows easy download of oceancolor and sea surface temperature data from <a href="http://oceancolor.gsfc.nasa.gov/">NASA Oceancolor</a>. </p>
+
+<p>It downloads either global <a href="http://oceancolor.gsfc.nasa.gov/cms/products">level 3 mapped</a> chlorophyll-a concentrations or sea surface temperatures within a defined time range, and resolution. The data is saved in GeoTiff format and can be added to the QGIS canvas once downloaded.  </p>
+
+<h2>
+<a id="the-data" class="anchor" href="#the-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>The data</h2>
+
+<p>All data is sourced from <a href="http://oceancolor.gsfc.nasa.gov/">NASA Oceancolor</a>. Full details on the input data can be found <a href="http://oceancolor.gsfc.nasa.gov/">here</a>, and includes <a href="http://oceancolor.gsfc.nasa.gov/cms/atbd">algorithm descriptions</a>. </p>
+
+<p>The plugin currently provides access to three datasets:</p>
+
+<ul>
+<li>MODIS AQUA CHL-a concentration</li>
+<li>SeaWiFS CHL-a concentration</li>
+<li>MODIS AQUA Night Sea Surface Temperatures</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The plugin requires QGIS version 2.0 or higher. It can be installed via the Plugin Manager. </p>
+
+<ol>
+<li><p>Navigate to <code>Plugins &gt; Manage and Install Plugins...</code></p></li>
+<li><p>Click <code>Settings</code></p></li>
+<li>
+<p>If it isn't already setup, add the Official QGIS plugin repository:</p>
+
+<p><code>http://plugins.qgis.org/plugins/plugins.xml</code></p>
+</li>
+<li><p>Click on <code>New</code> to see all newly available plugins. </p></li>
+<li><p>Install the plugin, named <strong>Oceancolor Downloader</strong>.</p></li>
+</ol>
+
+<h2>
+<a id="using-the-plugin" class="anchor" href="#using-the-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the plugin</h2>
+
+<ol>
+<li>
+<img src="images/icon-button.png" alt="Toolbar button">  Locate this icon on the toolbar and click it to open the plugin.</li>
+</ol>
+
+<p><img src="images/interface.png" alt="Plugin interface"></p>
+
+<ol>
+<li><p>Select a <strong>dataset</strong>, a <strong>time period</strong>, a <strong>date range</strong> and a <strong>download path</strong>. Select whether you wish to add the composite to the map canvas. </p></li>
+<li><p>Click <strong>Download</strong></p></li>
+</ol>
+
+<p>If you have chosen to add the data to the canvas, it will appear styled once the GeoTiff is created. Sea surface temperature data will also include a seperate quality grid, but this will not be added to the canvas. </p>
+
+<p><img src="images/sst-map.png" alt="SST"> </p>
+
+<h2>
+<a id="future-developments" class="anchor" href="#future-developments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future developments</h2>
+
+<p>We are currently developing new features and working to improve existing ones. A selection of features we are looking to include in a future release are as follows:</p>
+
+<ul>
+<li>Alternative output file formats</li>
+<li>Options to subset output data to a lat/long bounding box</li>
+<li>Other datasets, such as <a href="http://www.science.oregonstate.edu/ocean.productivity/">Net Primary Production</a>
+</li>
+<li>Progress bar</li>
+<li>'Cancel Download' button</li>
+<li>Warnings/notifications on amount of data selected to download</li>
+</ul>
+
+<h2>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<p>The plugin was developed by the Mapping and Geographic Information Centre at <a href="http://www.antarctica.ac.uk/">British Antarctic Survey</a>. </p>
+
+<p><img src="images/bas-logo.jpeg" alt="BAS logo">
+<img src="images/nerc-logo.jpg" alt="NERC logo"></p>
+
+<p>If using this plugin for work towards a publication, please cite: <a href="http://dx.doi.org/10.5281/zenodo.15018"><img src="https://zenodo.org/badge/9975/antarctica/oceancolor_downloader.svg" alt="DOI"></a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/antarctica">antarctica</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
