@@ -25,9 +25,9 @@ The plugin requires QGIS version 2.0 or higher. It can be installed via the Plug
 
 2. Click `Settings`
 
-3. Add the following repository:
+3. If it isn't already setup, add the Official QGIS plugin repository:
 
-    `LINK TO REPO - TBC`
+    `http://plugins.qgis.org/plugins/plugins.xml`
 
 4. Click on `New` to see all newly available plugins. 
 
