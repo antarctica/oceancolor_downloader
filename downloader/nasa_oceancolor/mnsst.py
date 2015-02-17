@@ -37,6 +37,15 @@ class Mnsst():
     		self.outproj.SetWellKnownGeogCS("WGS84")    
     		self.nodata = 65535
 
+	def setLogger(self, loggerObject):
+		"""
+		Input: Class with .log function
+		
+		Logs message to this class.
+	
+		"""
+		loggerObject.log("* Downloader set to Mnsst")
+		self.P.setLogger(loggerObject)
 
 	def download(self, path):
 		"""
