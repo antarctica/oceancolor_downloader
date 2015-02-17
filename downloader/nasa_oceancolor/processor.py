@@ -19,6 +19,16 @@ class Processor():
 		self.fns            = filenames
 		self.logger         = None
 
+	def log(self, message):
+		"""
+		Input: string message
+		
+		Logs message using logger object
+	
+		"""
+		if(self.logger):
+			self.logger.log(message)
+
 	def setLogger(self, loggerObject):
 		"""
 		Input: Class with .log function
@@ -27,7 +37,7 @@ class Processor():
 	
 		"""
 		self.logger = loggerObject
-		self.logger.log("* Processor loaded. Preparing to start download.")
+		self.log("* Processor loaded. Preparing to start download.")
 
 	def chunk_read(self, output, response, chunk_size=8192*64):
 		"""
@@ -53,7 +63,7 @@ class Processor():
 			percent = float(bytes_so_far) / total_size
 			percent = round(percent*100, 2)
 		
-			self.logger.log("Downloaded %d of %d bytes (%0.2f%%)\r" % (bytes_so_far, total_size, percent))
+			self.log("Downloaded %d of %d bytes (%0.2f%%)" % (bytes_so_far, total_size, percent))
 		
 
 		f.close()
@@ -68,7 +78,7 @@ class Processor():
 		f_compress = '{}.bz2'.format(targetfile)
 		f_uncompress = targetfile
 
-		self.logger.log("* Download: " + f_download + " beginning.")
+		self.log("* Download: " + f_download + " beginning.")
 
 		try:
 			#thefile = urllib2.urlopen(f_download)
@@ -77,7 +87,7 @@ class Processor():
 			#f.close()
 
 			thefile = urllib2.urlopen(f_download);
-			self.logger.log("File size: " + str(thefile.info().getheader('Content-Length').strip()) )
+			self.log("File size: " + str(thefile.info().getheader('Content-Length').strip()) )
 			self.chunk_read(f_compress, thefile) # Instead of the open/write/close trio
 
 			uncom = bz2.BZ2File(f_compress, 'rb').read()
@@ -88,7 +98,7 @@ class Processor():
 			return f_uncompress
 
 		except urllib2.URLError, e:    		
-			self.logger.log("URLError - could not download file. Are you connected to the internet?")
+			self.log("URLError - could not download file. Are you connected to the internet?")
 
 		except:
 			return 1
