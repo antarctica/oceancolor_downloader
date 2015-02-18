@@ -86,7 +86,7 @@ class Processor():
 			#f.write(thefile.read())
 			#f.close()
 
-			thefile = urllib2.urlopen(f_download);
+			thefile = urllib2.urlopen(f_download)
 			self.log("File size: " + str(thefile.info().getheader('Content-Length').strip()) )
 			self.chunk_read(f_compress, thefile) # Instead of the open/write/close trio
 
@@ -98,10 +98,10 @@ class Processor():
 			return f_uncompress
 
 		except urllib2.URLError, e:    		
-			self.log("URLError - could not download file. Are you connected to the internet?")
-
-		except:
+			self.log("URLError - could not download file.")
 			return 1
+		
+
 
 
 	def createfilenames(self):

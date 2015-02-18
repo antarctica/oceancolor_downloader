@@ -44,7 +44,7 @@ class Mnsst():
 		Logs message to this class.
 	
 		"""
-		loggerObject.log("* Downloader set to Mnsst")
+		#loggerObject.log("* Downloader set to Mnsst")
 		self.P.setLogger(loggerObject)
 
 	def download(self, path):
