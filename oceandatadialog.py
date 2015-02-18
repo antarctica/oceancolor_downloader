@@ -49,6 +49,7 @@ class DownloadThread(QtCore.QThread):
 	    self.log("Downloading...")
 	    C = downloader.get(self.datatype)
 	    d = C(self.mindate, self.maxdate, self.res, self.time_period)
+            d.setLogger(self)
 	    self.tifs = d.download(self.path)
 	    if len(self.tifs[1]) > 0:
 	        for f in self.tifs[1]:

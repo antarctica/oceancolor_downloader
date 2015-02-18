@@ -38,6 +38,14 @@ class Mchl:
     		self.outproj.SetWellKnownGeogCS("WGS84")    
     		self.nodata = -32767
 
+	def setLogger(self, loggerObject):
+		"""
+		Input: Class with .log function
+		
+		Logs message to this class.
+	
+		"""
+		self.P.setLogger(loggerObject)
 
 	def download(self, path):
 		"""
