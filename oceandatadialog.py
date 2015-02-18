@@ -153,14 +153,23 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	    self.comboBoxRes.setEnabled(True)
 	    self.toolButton.setEnabled(True)
 	else:
+	    self.btnCancel.setEnabled(True)
+	    self.btnClose.setEnabled(False)
             self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
             self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
             self.downloadThread.start()
 	    self.connect(self.downloadThread, QtCore.SIGNAL('finished()'), self.addlayers)
 
+    def stop(self):
+	self.downloadThread.terminate()
+	self.log('Download cancelled')
+        self.btnCancel.setEnabled(False)
+	self.btnClose.setEnabled(True)
 
     def addlayers(self):
 	self.btnDownload.setEnabled(True)
+	self.btnCancel.setEnabled(False)
+	self.btnClose.setEnabled(True)
 	self.comboBoxDatasets.setEnabled(True)
         self.comboBoxTime.setEnabled(True)
 	self.startDate.setEnabled(True)
