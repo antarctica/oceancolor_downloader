@@ -203,6 +203,8 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 		        self.iface.legendInterface().refreshLayerSymbology(l)
 	
 	        os.remove(qml)
+                rec = qgis.core.QgsRectangle(-180, -90, 180, 90) 
+		canvas.setExtent(rec)
 
         self.log('Done.')
 
