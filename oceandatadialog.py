@@ -19,6 +19,7 @@ from ui_oceandata import Ui_OceanData
 from qgis.utils import iface
 from downloader import style_pick 
 import os
+import qgis.core
 
 
 class DownloadThread(QtCore.QThread):
@@ -53,7 +54,7 @@ class DownloadThread(QtCore.QThread):
 	    if len(self.tifs[1]) > 0:
 	        for f in self.tifs[1]:
 	            self.log("\nUnable to download file: {}. Dataset may not exist\n".format(f))
-	    self.log("Complete.".format(self.path))
+	    self.log("Download complete.".format(self.path))
 
 
 
@@ -180,6 +181,13 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	    tifs = self.downloadThread.tifs[0]
 	    if len(tifs) > 0:
                 justnames = []
+		self.log('Setting CRS to WGS84 and adding rasters to canvas...')
+		crs = qgis.core.QgsCoordinateReferenceSystem()
+		crs.createFromId(4326)
+		canvas = self.iface.mapCanvas()
+		canvas.mapRenderer().setProjectionsEnabled(True)
+		canvas.mapRenderer().setDestinationCrs(crs)
+
 		for t in tifs:
                     self.iface.addRasterLayer(t)
 		    n = os.path.basename(t).replace('.tif', '')
@@ -195,4 +203,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 		        self.iface.legendInterface().refreshLayerSymbology(l)
 	
 	        os.remove(qml)
+
+        self.log('Done.')
+
 
