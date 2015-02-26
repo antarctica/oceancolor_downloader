@@ -1,4 +1,4 @@
-Oceancolor Data Downloader v1.0
+Oceancolor Data Downloader v1.1
 =======================================
 
 ##What it does
