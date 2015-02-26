@@ -64,8 +64,9 @@ class Processor():
 			percent = round(percent*100, 2)
 		
 			self.log("Downloaded %d of %d bytes (%0.2f%%)" % (bytes_so_far, total_size, percent))
-		
 
+		self.log(' ')
+		
 		f.close()
 
 		return bytes_so_far
@@ -74,11 +75,14 @@ class Processor():
 		"""
 		Method to download and extract a file
 		"""
+		self.log('* Downloading file {0} of {1}'.format(self.file_no, self.no_files))
+
+
 		f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(os.path.basename(targetfile))
 		f_compress = '{}.bz2'.format(targetfile)
 		f_uncompress = targetfile
 
-		self.log("* Download: " + f_download + " beginning.")
+		self.log("* Dataset: " + os.path.basename(targetfile))
 
 		try:
 			#thefile = urllib2.urlopen(f_download)
@@ -180,6 +184,7 @@ class Processor():
 				d = d + relativedelta(days=1)
 
 
-
+		self.no_files = len(filenames)
+		self.log('* NUMBER OF FILES STAGED FOR DOWNLOAD: {}'.format(self.no_files))
 		return filenames
 

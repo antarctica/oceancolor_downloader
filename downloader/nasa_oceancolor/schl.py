@@ -56,14 +56,17 @@ class Schl:
 		filenames = self.P.createfilenames()
 		tiffiles = [[],[]]
 
+		self.P.file_no = 1
 		for f in filenames:
 			f = os.path.join(self.path, f)
 			f_uncompress = self.P.extract(f)
 			if not f_uncompress == 1:
 				tif = self.__process(f_uncompress)
 				tiffiles[0].append(tif)
+				self.P.file_no += 1
 			else:
 				tiffiles[1].append(os.path.basename(f))
+				self.P.file_no += 1
 
 		return tiffiles
 
