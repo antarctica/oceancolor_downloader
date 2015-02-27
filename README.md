@@ -58,8 +58,6 @@ We are currently developing new features and working to improve existing ones. A
 * Options to subset output data to a lat/long bounding box
 * Other datasets, such as [Net Primary Production](http://www.science.oregonstate.edu/ocean.productivity/)
 * Progress bar
-* 'Cancel Download' button
-* Warnings/notifications on amount of data selected to download
 
 
 ##Acknowledgements
