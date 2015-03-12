@@ -24,13 +24,13 @@ import qgis.core
 
 class DownloadThread(QtCore.QThread):
     def __init__(self, path, mindate, maxdate, res, time_period, datatype):
-        self.path    = os.path.abspath(path)
-        self.mindate = mindate.toPyDate()
-	self.mindate = datetime.combine(self.mindate, datetime.min.time())
-        self.maxdate = maxdate.toPyDate()
-	self.maxdate = datetime.combine(self.maxdate, datetime.min.time())
-	self.res     = res
-	self.datatype = datatype
+        self.path        = os.path.abspath(path)
+        self.mindate     = mindate.toPyDate()
+	self.mindate     = datetime.combine(self.mindate, datetime.min.time())
+        self.maxdate     = maxdate.toPyDate()
+	self.maxdate     = datetime.combine(self.maxdate, datetime.min.time())
+	self.res         = res
+	self.datatype    = datatype
 	self.time_period = time_period
         
 	QtCore.QThread.__init__(self)
@@ -65,10 +65,13 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.iface = iface
 
 	self.data_desc = {
-		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present\n',
-		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11\n',
+		'AQUA MODIS Chlorophyll Concentration': 
+		    'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present\n',
+		'SeaWiFS Chlorophyll Concentration': 
+		    'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11\n',
 		'': '\n',
-		'AQUA MODIS Sea Surface Temperature': 'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present\n',
+		'AQUA MODIS Sea Surface Temperature': 
+		    'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present\n',
 	}
 
     
@@ -76,14 +79,16 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
         self.plainTextEdit.appendPlainText(text)
 
     def update(self):
-	if not self.comboBoxDatasets.currentText() == ' ':
+	if not self.comboBoxDatasets.currentText() == '':
 	    self.btnDownload.setEnabled(True)
 	else:
             self.btnDownload.setEnabled(False)
 
 	self.plainTextEdit.clear()
         data_type = self.data_desc[self.comboBoxDatasets.currentText()]
-	self.plainTextEdit.appendPlainText('For full details of source datasets, refer to http://oceancolor.gsfc.nasa.gov/\n')
+	self.plainTextEdit.appendPlainText(
+		'For full details of source datasets, refer to http://oceancolor.gsfc.nasa.gov/\n'
+	)
 	self.plainTextEdit.appendPlainText(data_type)
 	
 	self.comboBoxRes.clear()
@@ -126,36 +131,30 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.txtPath.setText(self.fileDialog.getExistingDirectory())
 
     def accept(self):
-	self.btnDownload.setEnabled(False)
-        self.comboBoxDatasets.setEnabled(False)
-        self.comboBoxTime.setEnabled(False)
-	self.startDate.setEnabled(False)
-	self.endDate.setEnabled(False)
-	self.comboBoxRes.setEnabled(False)
-	self.toolButton.setEnabled(False)
-
-	mindate    = self.startDate.date()
-        maxdate    = self.endDate.date()
-        path       = self.txtPath.text()
-        res        = self.comboBoxRes.currentText()
-	res        = int(res.replace('km', ''))
-	datatype   = self.comboBoxDatasets.currentText()
-	self.style = style_pick.get(datatype)
-	period     = self.comboBoxTime.currentText()
-	
+        path    = self.txtPath.text()
 	if path == "":
-	    self.plainTextEdit.appendPlainText("Error: Enter a download directory.")
-	    self.btnDownload.setEnabled(True)
-	    self.comboBoxDatasets.setEnabled(True)
-            self.comboBoxTime.setEnabled(True)
-	    self.startDate.setEnabled(True)
-	    self.endDate.setEnabled(True)
-	    self.comboBoxRes.setEnabled(True)
-	    self.toolButton.setEnabled(True)
+            self.plainTextEdit.appendPlainText("Error: Enter a download directory.")
 	else:
+	     
+	    mindate    = self.startDate.date()
+            maxdate    = self.endDate.date()
+            res        = self.comboBoxRes.currentText()
+	    res        = int(res.replace('km', ''))
+	    datatype   = self.comboBoxDatasets.currentText()
+	    self.style = style_pick.get(datatype)
+	    period     = self.comboBoxTime.currentText()
+	
+	    self.btnDownload.setEnabled(False)
+            self.comboBoxDatasets.setEnabled(False)
+            self.comboBoxTime.setEnabled(False)
+	    self.startDate.setEnabled(False)
+	    self.endDate.setEnabled(False)
+	    self.comboBoxRes.setEnabled(False)
+	    self.toolButton.setEnabled(False)
 	    self.btnCancel.setEnabled(True)
 	    self.btnClose.setEnabled(False)
-            self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
+            
+	    self.downloadThread = DownloadThread(path, mindate, maxdate, res, period, datatype)
             self.connect(self.downloadThread, QtCore.SIGNAL("update(QString)"), self.log)
             self.downloadThread.start()
 	    self.connect(self.downloadThread, QtCore.SIGNAL('finished()'), self.addlayers)
