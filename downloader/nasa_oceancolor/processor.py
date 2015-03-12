@@ -102,7 +102,7 @@ class Processor():
 			return f_uncompress
 
 		except urllib2.URLError, e:    		
-			self.log("URLError - could not download file.")
+			self.log("URLError - could not download file\n")
 			return 1
 		
 
