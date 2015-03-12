@@ -67,7 +67,7 @@ class OceanDataDialog(QtGui.QDialog, Ui_OceanData):
 	self.data_desc = {
 		'AQUA MODIS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 2002/07/04 - present\n',
 		'SeaWiFS Chlorophyll Concentration': 'Mapped CHL-a concentrations \nValid date range: 1997/09/04 - 2010/12/11\n',
-		' ': '\n',
+		'': '\n',
 		'AQUA MODIS Sea Surface Temperature': 'Mapped Night Sea Surface Temperatures \nValid date range: 2002/07/04 - present\n',
 	}
 
