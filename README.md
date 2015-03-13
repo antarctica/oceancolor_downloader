@@ -68,4 +68,5 @@ The plugin was developed by the Mapping and Geographic Information Centre at [Br
 ![BAS logo](images/bas-logo.jpeg)
 ![NERC logo](images/nerc-logo.jpg)
 
-If using this plugin for work towards a publication, please cite: [![DOI](https://zenodo.org/badge/9975/antarctica/oceancolor_downloader.svg)](http://dx.doi.org/10.5281/zenodo.15018)
+
+If using this plugin for work towards a publication, please cite: [![DOI](https://zenodo.org/badge/9975/antarctica/oceancolor_downloader.svg)](http://dx.doi.org/10.5281/zenodo.16020)
