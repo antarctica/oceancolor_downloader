@@ -78,28 +78,18 @@ class Processor():
 		self.log('* Downloading file {0} of {1}'.format(self.file_no, self.no_files))
 
 
-		f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.bz2'.format(os.path.basename(targetfile))
-		f_compress = '{}.bz2'.format(targetfile)
+		f_download = 'http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/{}.nc'.format(os.path.basename(targetfile))
+		f_compress = '{}.nc'.format(targetfile)
 		f_uncompress = targetfile
 
 		self.log("* Dataset: " + os.path.basename(targetfile))
 
 		try:
-			#thefile = urllib2.urlopen(f_download)
-			#f = open(f_compress, 'wb')
-			#f.write(thefile.read())
-			#f.close()
-
 			thefile = urllib2.urlopen(f_download)
 			self.log("File size: " + str(thefile.info().getheader('Content-Length').strip()) )
 			self.chunk_read(f_compress, thefile) # Instead of the open/write/close trio
 
-			uncom = bz2.BZ2File(f_compress, 'rb').read()
-			output = open(f_uncompress, 'wb')
-			output.write(uncom)
-			output.close()
-			os.remove(f_compress)
-			return f_uncompress
+			return f_compress
 
 		except urllib2.URLError, e:    		
 			self.log("URLError - could not download file\n")
@@ -148,7 +138,6 @@ class Processor():
 			d = self.start_date
 			doy = d.strftime('%j')
 			date_ref = ocfiledates.wk
-			#get it so the date is at the start of any 8 day period to initialise the loop
 			for dr in date_ref:
 				if int(doy) in dr:
 					doy = min(dr)

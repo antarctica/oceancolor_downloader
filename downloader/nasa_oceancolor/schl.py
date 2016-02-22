@@ -81,10 +81,13 @@ class Schl:
 		Inserts metadata tags to output geotiff
 		
 		"""
-		outname = '{0}.tif'.format(targetfile)
+		outname = '{0}.tif'.format(targetfile.replace('.nc', ''))
 		g = gdal.Open(targetfile)
-		
-		arr = g.ReadAsArray()
+		sub  = g.GetSubDatasets()
+                chl  = gdal.Open(sub[0][0])
+
+
+		arr = chl.ReadAsArray()
 		arr = np.array(arr)
 		[cols, rows] = arr.shape
 		
@@ -98,25 +101,16 @@ class Schl:
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
 		dst_ds.SetMetadataItem('SENSOR', 'SeaWiFS')
 		dst_ds.SetMetadataItem('RESOLUTION', '{}km'.format(self.res))
-		dst_ds.SetMetadataItem('DATA START DAY', g.GetMetadataItem('Period Start Day'))
-		dst_ds.SetMetadataItem('DATA END DAY', g.GetMetadataItem('Period End Day'))
-		dst_ds.SetMetadataItem('DATA START YEAR', g.GetMetadataItem('Period Start Year'))
-		dst_ds.SetMetadataItem('DATA END YEAR', g.GetMetadataItem('Period End Year'))
 		date = datetime.now()
 		date = date.strftime('%Y-%m-%d')
 		dst_ds.SetMetadataItem('DOWNLOAD_DATE', date)
 		dst_ds.SetMetadataItem('DOWNLOAD_FROM', 'NASA OCEANCOLOUR')
-                dst_ds.SetMetadataItem('PROCESSING_TIME',g.GetMetadataItem('Processing Time'))
-                dst_ds.SetMetadataItem('PROCESSING_VERSION',g.GetMetadataItem('Processing Version'))
-		dst_ds.SetMetadataItem('DATA START YEAR', g.GetMetadataItem('Period Start Year'))
-		dst_ds.SetMetadataItem('DATA END YEAR', g.GetMetadataItem('Period End Year'))
-		dst_ds.SetMetadataItem('PARAMETER', g.GetMetadataItem('Parameter'))
-		dst_ds.SetMetadataItem('UNITS', g.GetMetadataItem('Units'))
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
-		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(arr)
 
 		g = None
+                sub = None
+                chl = None
 
 		os.remove(targetfile)
 		return outname

@@ -19,10 +19,10 @@ class Mnsst():
 		self.res            = res
 		self.time_composite = time_composite
 
-		self.fns = {'fn_annual': 'A{0}001{0}{1}.L3m_YR_NSST_{2}',
-				'fn_monthly': 'A{0}{1}{0}{2}.L3m_MO_NSST_{3}',
-				'fn_8day': 'A{0}{1:0>3}{0}{2:0>3}.L3m_8D_NSST_{3}',
-				'fn_daily': 'A{0}{1}.L3m_DAY_NSST_{2}',
+		self.fns = {'fn_annual': 'A{0}001{0}{1}.L3m_YR_NSST_sst_{2}km',
+				'fn_monthly': 'A{0}{1}{0}{2}.L3m_MO_NSST_sst_{3}km',
+				'fn_8day': 'A{0}{1:0>3}{0}{2:0>3}.L3m_8D_NSST_sst_{3}km',
+				'fn_daily': 'A{0}{1}.L3m_DAY_NSST_sst_{2}km',
 				}
 
 
@@ -44,14 +44,13 @@ class Mnsst():
 		Logs message to this class.
 	
 		"""
-		#loggerObject.log("* Downloader set to Mnsst")
 		self.P.setLogger(loggerObject)
 
 	def download(self, path):
 		"""
 		Input: path to download files to.
 		
-		Downloads relevant HDFs and converts to geotiff
+		Downloads relevant NETCDFs and converts to geotiff
 	
 		"""
 		self.path = os.path.abspath(path)
@@ -76,19 +75,24 @@ class Mnsst():
 
 	def __process(self, targetfile):
 		"""
-		Converts HDF to GEOTIFFs. 
-		Input: .hdf file
+		Converts NC to GEOTIFFs. 
+		Input: .nc file
 
 		Inserts metadata tags to output geotiff
 
 		"""
-		outname = '{0}.tif'.format(targetfile)
+                slope = 0.000717184972018003
+                inter = -2
+                
+                self.P.log(targetfile)
+		outname = '{0}.tif'.format(targetfile.replace('.nc', ''))
 
 		g    = gdal.Open(targetfile)
-		sub  = g.GetSubDatasets()
+                sub  = g.GetSubDatasets()
 		sst  = gdal.Open(sub[0][0])
 		qual = gdal.Open(sub[1][0])
 		
+
 		sstarr  = sst.ReadAsArray()
 		qualarr = qual.ReadAsArray()
 		sstarr = np.array(sstarr, dtype=np.float32)
@@ -96,9 +100,6 @@ class Mnsst():
 
 		[cols, rows] = sstarr.shape
 
-		#scaling
-		slope = float(sst.GetMetadataItem('Slope'))
-		inter = float(sst.GetMetadataItem('Intercept'))
 
 		m = np.ma.masked_values(sstarr, self.nodata)
 		
@@ -114,20 +115,11 @@ class Mnsst():
 		dst_ds.SetProjection(self.outproj.ExportToWkt())
 		dst_ds.SetMetadataItem('SENSOR', 'AQUA_MODIS')
 		dst_ds.SetMetadataItem('RESOLUTION', '{}km'.format(self.res))
-		dst_ds.SetMetadataItem('DATA START DAY', g.GetMetadataItem('Period Start Day'))
-		dst_ds.SetMetadataItem('DATA END DAY', g.GetMetadataItem('Period End Day'))
-		dst_ds.SetMetadataItem('DATA START YEAR', g.GetMetadataItem('Period Start Year'))
-		dst_ds.SetMetadataItem('DATA END YEAR', g.GetMetadataItem('Period End Year'))
 		date = datetime.now()
 		date = date.strftime('%Y-%m-%d')
 		dst_ds.SetMetadataItem('DOWNLOAD_DATE', date)
-		dst_ds.SetMetadataItem('DOWNLOAD_FROM', 'NASA OCEANCOLOUR')
-		dst_ds.SetMetadataItem('PROCESSING_TIME',g.GetMetadataItem('Processing Time'))
-		dst_ds.SetMetadataItem('PROCESSING_VERSION',g.GetMetadataItem('Processing Version'))
-		dst_ds.SetMetadataItem('PARAMETER', g.GetMetadataItem('Parameter'))
-		dst_ds.SetMetadataItem('UNITS', g.GetMetadataItem('Units'))
+		dst_ds.SetMetadataItem('DOWNLOAD_FROM', 'NASA OCEANCOLOR')
 		dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
-		dst_ds.SetMetadataItem('YEAR', g.GetMetadataItem('Start Year'))
 		band.WriteArray(scaled)
 		
 		outdataqual = gdal.GetDriverByName("GTiff")
