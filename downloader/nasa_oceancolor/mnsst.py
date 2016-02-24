@@ -91,9 +91,15 @@ class Mnsst():
 
         g    = gdal.Open(targetfile)
         sub  = g.GetSubDatasets()
-        sst  = gdal.Open(sub[0][0])
-        qual = gdal.Open(sub[1][0])
+        #sst  = gdal.Open(sub[0][0])
+        #qual = gdal.Open(sub[1][0])
         
+        for s in sub:
+            for s1 in s:
+                if ':sst' in s1 or '://sst' in s1:
+                    sst = gdal.Open(s1)
+                if ':qual_sst' in s1 or '://qual_sst' in s1:
+                    qual = gdal.Open(s1)
 
         sstarr  = sst.ReadAsArray()
         qualarr = qual.ReadAsArray()

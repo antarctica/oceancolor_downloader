@@ -107,7 +107,6 @@ class Mchl:
         date = date.strftime('%Y-%m-%d')
         dst_ds.SetMetadataItem('DOWNLOAD_DATE', date)
         dst_ds.SetMetadataItem('DOWNLOAD_FROM', 'NASA OCEANCOLOUR')
-        dst_ds.SetMetadataItem('PROCESSING_VERSION',g.GetMetadataItem('Processing Version'))
         dst_ds.SetMetadataItem('NODATA VALUE', '{}'.format(self.nodata))
         band.WriteArray(arr)
         
